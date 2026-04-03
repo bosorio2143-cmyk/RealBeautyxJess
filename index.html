@@ -6,8 +6,11 @@
     <title>RealBeautyXJess</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        body { background: #060408; color: #fff; font-family: sans-serif; text-align: center; }
-        .hero { padding: 50px; color: #ff2e8f; }
+        body { background: #060408; color: #fff; font-family: sans-serif; padding: 20px; }
+        .hero { color: #ff2e8f; text-align: center; margin-bottom: 30px; }
+        .card { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
+        input { width: 100%; padding: 10px; margin-top: 10px; background: #000; color: #fff; border: 1px solid #ff2e8f; }
+        button { background: #ff2e8f; color: white; border: none; padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -15,9 +18,23 @@
         <h1>RealBeautyXJess</h1>
         <p>Elite Tech Aftercare & Mapping</p>
     </div>
+
+    <div class="card">
+        <h3>🔐 Digital Aftercare Vault</h3>
+        <input type="password" id="vaultCode" placeholder="Enter Access Code">
+        <button onclick="checkVault()">Unlock</button>
+    </div>
+
+    <div class="card">
+        <h3>📅 Healing Diary</h3>
+        <p>Track your recovery progress in real-time.</p>
+    </div>
+
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+        function checkVault() {
+            const code = document.getElementById('vaultCode').value;
+            if(code === 'JESS2026') { alert('Vault Unlocked: Welcome to the Elite Tech Suite.'); }
+            else { alert('Invalid Access Code'); }
         }
     </script>
 </body>
