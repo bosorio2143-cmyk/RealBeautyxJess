@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealBeautyXJess</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { background: #060408; color: #fff; font-family: sans-serif; text-align: center; }
+        .hero { padding: 50px; color: #ff2e8f; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>RealBeautyXJess</h1>
+        <p>Elite Tech Aftercare & Mapping</p>
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
