@@ -1,0 +1,8 @@
+{
+  "name": "RealBeautyXJess",
+  "short_name": "Jess",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#060408",
+  "theme_color": "#ff2e8f"
+}
