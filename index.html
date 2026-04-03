@@ -1,41 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealBeautyXJess</title>
-    <link rel="manifest" href="manifest.json">
-    <style>
-        body { background: #060408; color: #fff; font-family: sans-serif; padding: 20px; }
-        .hero { color: #ff2e8f; text-align: center; margin-bottom: 30px; }
-        .card { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
-        input { width: 100%; padding: 10px; margin-top: 10px; background: #000; color: #fff; border: 1px solid #ff2e8f; }
-        button { background: #ff2e8f; color: white; border: none; padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#060408">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RBXJess">
+<meta name="description" content="RealBeautyXJess — Luxury PMU & Lash Client Portal · Los Angeles">
+<title>RealBeautyXJess — Client Portal</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff2e8f;
+  --pink2:#ff5fa2;
+  --chrome:#cfcfcf;
+  --dark:#060408;
+  --card:#0c080f;
+  --safe-top:env(safe-area-inset-top);
+  --safe-bot:env(safe-area-inset-bottom);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;padding-top:var(--safe-top);padding-bottom:calc(72px + var(--safe-bot));}
+.serif{font-family:'Cormorant Garamond',serif}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,46,143,.2);border-radius:2px}
+#bgc{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;display:block}
+.portal-nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.75rem;border-bottom:1px solid rgba(207,207,207,.08);background:rgba(6,4,8,.97);position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+.pn-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;letter-spacing:.12em;color:var(--pink);font-weight:400}
+.pn-badge{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(207,207,207,.28);border:1px solid rgba(207,207,207,.1);padding:.3rem .8rem;border-radius:1px}
+.portal-hero{position:relative;overflow:hidden;min-height:42vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3.5rem 2rem 3rem;}
+.hero-inner{position:relative;z-index:1}
+.eyebrow-line{display:flex;align-items:center;gap:1rem;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(207,207,207,.4);margin-bottom:1.5rem;justify-content:center}
+.el{flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,46,143,.35))}
+.elr{background:linear-gradient(90deg,rgba(255,46,143,.35),transparent)}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,9vw,4rem);font-weight:300;line-height:1;color:#fff;margin-bottom:.4rem}
+.hero-h em{font-style:italic;color:var(--pink)}
+.hero-sub{font-size:.8rem;color:rgba(207,207,207,.45);letter-spacing:.06em;max-width:300px;line-height:1.8;margin:.75rem auto 0}
+.sec{padding:2.75rem 1.75rem;max-width:100%}
+.sec-dark{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05)}
+.sec-ey{font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;opacity:.8}
+.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:.6rem}
+.sec-sub{font-size:.8rem;color:rgba(207,207,207,.38);letter-spacing:.04em;margin-bottom:2rem;line-height:1.8}
+.panel{display:none;animation:fadeUp .3s ease}
+.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.qnav{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.qc{background:var(--card);padding:1.75rem 1.25rem;cursor:pointer;transition:all .25s;border:1px solid transparent;display:flex;flex-direction:column;gap:.45rem;}
+.qc:hover,.qc:active{background:#130a18;border-color:var(--pink);transform:translateY(-2px)}
+.qc-ico{font-size:1.4rem}
+.qc-badge{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);opacity:.7}
+.qc-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#fff}
+.qc-desc{font-size:.7rem;color:rgba(207,207,207,.28);line-height:1.5}
+.btn-p{background:var(--pink);color:#000;border:none;padding:.85rem 2rem;font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-weight:500;border-radius:1px;transition:all .25s;font-family:'Inter',sans-serif}
+.btn-p:hover{background:var(--pink2);transform:translateY(-2px)}
+.btn-p:active{transform:translateY(0)}
+.btn-o{background:transparent;color:var(--chrome);border:1px solid rgba(207,207,207,.25);padding:.85rem 2rem;font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border-radius:1px;transition:all .25s;font-family:'Inter',sans-serif}
+.btn-o:hover{border-color:var(--pink);color:var(--pink)}
+.btn-full{width:100%}
+.cr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,46,143,.3) 30%,rgba(207,207,207,.2) 50%,rgba(255,46,143,.3) 70%,transparent);margin:2rem auto}
+.bnav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:.7rem 0 calc(.7rem + var(--safe-bot));background:rgba(6,4,8,.97);border-top:1px solid rgba(207,207,207,.08);z-index:200;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+.nb{display:flex;flex-direction:column;align-items:center;gap:.28rem;background:none;border:none;cursor:pointer;color:rgba(207,207,207,.3);font-family:'Inter',sans-serif;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;transition:color .2s;padding:.2rem .75rem}
+.nb.active{color:var(--pink)}
+.nb svg{width:20px;height:20px;transition:transform .2s}
+.nb.active svg{transform:scale(1.1)}
+.vault-icon-ring{width:72px;height:72px;border-radius:50%;border:1px solid rgba(255,46,143,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:rgba(255,46,143,.04)}
+.vault-code-row{display:flex;gap:.5rem;margin:1.25rem 0 .5rem}
+.vi{flex:1;background:#0a0610;border:1px solid rgba(207,207,207,.1);border-radius:1px;color:#fff;font-family:'Inter',sans-serif;font-size:.95rem;letter-spacing:.22em;text-align:center;padding:.8rem 1rem;outline:none;transition:border-color .2s}
+.vi:focus{border-color:var(--pink)}
+.vi::placeholder{color:rgba(207,207,207,.18);letter-spacing:.06em;font-size:.72rem}
+.vault-error{font-size:.7rem;color:#ff6b6b;text-align:center;margin-top:.4rem;opacity:0;transition:opacity .25s;letter-spacing:.04em}
+.vault-error.show{opacity:1}
+.vault-open{display:none}
+.vault-open.show{display:block;animation:fadeUp .35s ease}
+.unlock-banner{display:flex;align-items:center;gap:.85rem;background:rgba(255,46,143,.04);border:1px solid rgba(255,46,143,.15);border-radius:1px;padding:.85rem 1.25rem;margin-bottom:2rem}
+.ub-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;animation:pls 2s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.3}}
+.ub-text{font-size:.73rem;color:rgba(207,207,207,.5);letter-spacing:.03em;line-height:1.6}
+.ub-text strong{color:var(--pink)}
+.pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.pdf-card{background:var(--card);padding:2rem 1.25rem;cursor:pointer;transition:all .25s;border:1px solid transparent;text-align:center}
+.pdf-card:hover{background:#130a18;border-color:var(--pink);transform:translateY(-3px)}
+.pdf-ico{font-size:1.5rem;margin-bottom:.6rem}
+.pdf-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:#fff;margin-bottom:.4rem}
+.pdf-badge{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);opacity:.65}
+.proc-type-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.pt-btn{background:var(--card);padding:1.1rem 1rem;border:1px solid transparent;cursor:pointer;font-family:'Inter',sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(207,207,207,.35);transition:all .2s;text-align:center}
+.pt-btn.active{background:#130a18;border-color:var(--pink);color:var(--pink)}
+.pt-ico{display:block;font-size:1.1rem;margin-bottom:.3rem}
+.date-row{background:var(--card);border-bottom:1px solid rgba(207,207,207,.05);padding:1.5rem 1.75rem}
+.di-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(207,207,207,.25);margin-bottom:.6rem}
+.di{width:100%;background:#0a0610;border:1px solid rgba(207,207,207,.1);color:#fff;font-family:'Inter',sans-serif;font-size:.88rem;padding:.78rem 1rem;outline:none;transition:border-color .2s;border-radius:1px;-webkit-appearance:none;color-scheme:dark}
+.di:focus{border-color:var(--pink)}
+.diary-tl{display:none}
+.diary-tl.show{display:block;animation:fadeUp .35s ease}
+.tl-header{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:2.5rem 1.75rem;text-align:center}
+.tl-day-num{font-family:'Cormorant Garamond',serif;font-size:5.5rem;font-weight:300;color:var(--pink);line-height:1}
+.tl-day-sub{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(207,207,207,.28);margin:.3rem 0 .85rem}
+.tl-status-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:#fff;margin-bottom:.5rem}
+.tl-tip{font-size:.78rem;color:rgba(207,207,207,.36);line-height:1.75;max-width:300px;margin:0 auto}
+.stage-list{padding:0 1.75rem}
+.stage-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid rgba(207,207,207,.05)}
+.stage-item:last-child{border-bottom:none}
+.stage-dot{width:9px;height:9px;border-radius:50%;background:rgba(207,207,207,.1);flex-shrink:0;margin-top:4px}
+.stage-item.past .stage-dot{background:rgba(255,46,143,.35)}
+.stage-item.current .stage-dot{background:var(--pink);box-shadow:0 0 8px rgba(255,46,143,.55)}
+.stage-range{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.2);margin-bottom:.22rem}
+.stage-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(207,207,207,.55);margin-bottom:.2rem}
+.stage-item.current .stage-name{color:#fff}
+.stage-desc{font-size:.72rem;color:rgba(207,207,207,.26);line-height:1.65}
+.stage-item.current .stage-desc{color:rgba(207,207,207,.42)}
+.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.sc{background:var(--card);padding:1.5rem 1.25rem;transition:all .3s;border:1px solid transparent;cursor:pointer;text-align:center}
+.sc:hover,.sc.active{background:#130a18;border-color:var(--pink)}
+.sc-ico{font-size:1.2rem;margin-bottom:.4rem}
+.sc-badge{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);opacity:.65;margin-bottom:.35rem}
+.sc-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:#fff;margin-bottom:.28rem}
+.sc-desc{font-size:.66rem;color:rgba(207,207,207,.26);line-height:1.5}
+.eye-wrap{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:2rem 1.75rem;text-align:center}
+.eye-labels{display:flex;justify-content:space-around;margin-top:1.25rem}
+.eye-lbl-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--pink);font-weight:300;display:block}
+.eye-lbl-key{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.2)}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(207,207,207,.06)}
+.spec-cell{background:var(--card);padding:1.25rem 1rem;text-align:center}
+.spec-lbl{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.2);margin-bottom:.4rem}
+.spec-val{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--pink);font-weight:300}
+.jess-note{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:2rem 1.75rem}
+.jess-note blockquote{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:rgba(207,207,207,.55);line-height:1.75;padding-left:1.25rem;border-left:2px solid var(--pink)}
+.install-bar{display:none;background:rgba(255,46,143,.04);border-bottom:1px solid rgba(255,46,143,.12);padding:.85rem 1.75rem}
+.install-bar.show{display:block}
+.ib-row{display:flex;align-items:center;gap:.75rem}
+.ib-ico{font-size:1.1rem}
+.ib-title{font-size:.72rem;color:rgba(207,207,207,.55);flex:1;letter-spacing:.03em}
+.ib-close{font-size:.9rem;color:rgba(207,207,207,.2);background:none;border:none;cursor:pointer}
+.ib-sub{font-size:.63rem;color:rgba(207,207,207,.2);margin-top:.3rem;padding-left:1.85rem;line-height:1.5}
+#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:rgba(12,8,15,.97);border:1px solid rgba(255,46,143,.22);color:rgba(207,207,207,.72);padding:.72rem 1.25rem;font-size:.74rem;letter-spacing:.04em;line-height:1.5;border-radius:1px;z-index:500;text-align:center;max-width:88vw;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(12px)}
+.mini-footer{border-top:1px solid rgba(207,207,207,.07);padding:3rem 1.75rem;text-align:center;background:#030205}
+.mf-logo{font-family:'Cormorant Garamond',serif;font-size:1.75rem;color:var(--pink);font-weight:300;margin-bottom:.3rem}
+.mf-sub{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.2);margin-bottom:1.5rem}
+.mf-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.mf-links a,.mf-links button{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.25);text-decoration:none;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;transition:color .2s}
+.mf-links a:hover,.mf-links button:hover{color:var(--pink)}
+.mf-fine{font-size:.58rem;color:rgba(207,207,207,.1);letter-spacing:.06em}
+</style>
 </head>
 <body>
-    <div class="hero">
-        <h1>RealBeautyXJess</h1>
-        <p>Elite Tech Aftercare & Mapping</p>
-    </div>
 
-    <div class="card">
-        <h3>🔐 Digital Aftercare Vault</h3>
-        <input type="password" id="vaultCode" placeholder="Enter Access Code">
-        <button onclick="checkVault()">Unlock</button>
-    </div>
+<nav class="portal-nav">
+  <div class="pn-logo serif">RealBeautyXJess</div>
+  <div class="pn-badge">Client Portal</div>
+</nav>
 
-    <div class="card">
-        <h3>📅 Healing Diary</h3>
-        <p>Track your recovery progress in real-time.</p>
-    </div>
+<div class="install-bar" id="installBar">
+  <div class="ib-row">
+    <span class="ib-ico">📲</span>
+    <span class="ib-title">Add to Home Screen for the full app experience</span>
+    <button class="ib-close" onclick="dismissInstall()" aria-label="Dismiss">✕</button>
+  </div>
+  <div class="ib-sub">Tap the Share icon → "Add to Home Screen"</div>
+</div>
 
-    <script>
-        function checkVault() {
-            const code = document.getElementById('vaultCode').value;
-            if(code === 'JESS2026') { alert('Vault Unlocked: Welcome to the Elite Tech Suite.'); }
-            else { alert('Invalid Access Code'); }
-        }
-    </script>
+<div class="panel active" id="panel-home">
+  <div class="portal-hero">
+    <canvas id="bgc"></canvas>
+    <div class="hero-inner">
+      <div class="eyebrow-line"><div class="el"></div>Client Portal · Los Angeles<div class="el elr"></div></div>
+      <h1 class="hero-h serif">Real Beauty<br><em>by Jess</em></h1>
+      <p class="hero-sub">Your aftercare guides, healing tracker &amp; lash profile — all in one place.</p>
+    </div>
+  </div>
+  <div class="qnav">
+    <div class="qc" onclick="nav('vault')"><div class="qc-ico">🔐</div><div class="qc-badge">Aftercare</div><div class="qc-name serif">Aftercare Vault</div><div class="qc-desc">Download your care guides</div></div>
+    <div class="qc" onclick="nav('diary')"><div class="qc-ico">📅</div><div class="qc-badge">Recovery</div><div class="qc-name serif">Healing Diary</div><div class="qc-desc">Track your healing day by day</div></div>
+    <div class="qc" onclick="nav('lashmap')"><div class="qc-ico">👁</div><div class="qc-badge">Profile</div><div class="qc-name serif">Lash Map</div><div class="qc-desc">Your custom lash blueprint</div></div>
+    <div class="qc" onclick="window.open('https://bosorio2143-cmyk.github.io/RealBeautyxJess/','_blank')"><div class="qc-ico">🌐</div><div class="qc-badge">Website</div><div class="qc-name serif">Main Site</div><div class="qc-desc">Book, services &amp; gallery</div></div>
+  </div>
+  <div class="sec-dark">
+    <div class="sec">
+      <div class="sec-ey">Need Jess?</div>
+      <h2 class="sec-h serif">Get in Touch</h2>
+      <p class="sec-sub">Questions about aftercare, healing, or your next appointment? Jess typically replies within a few hours.</p>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <a href="sms:+1" style="flex:1;min-width:130px;text-decoration:none"><button class="btn-p btn-full">💬 Text Jess</button></a>
+        <a href="https://instagram.com/realbeautyxjess" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:130px;text-decoration:none"><button class="btn-o btn-full">📸 Instagram</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="mini-footer">
+    <div class="cr"></div>
+    <div class="mf-logo serif">RealBeautyXJess</div>
+    <div class="mf-sub">Los Angeles, CA &middot; High-Maintenance, On Purpose</div>
+    <div class="mf-links">
+      <a href="https://instagram.com/realbeautyxjess" target="_blank" rel="noopener noreferrer">@realbeautyxjess</a>
+      <button onclick="nav('vault')">Aftercare</button>
+      <button onclick="nav('diary')">Healing</button>
+      <button onclick="nav('lashmap')">Lash Map</button>
+    </div>
+    <p class="mf-fine">By appointment only &middot; Sun &amp; Mon closed &middot; &copy; 2026 RealBeautyXJess</p>
+  </div>
+</div>
+
+<div class="panel" id="panel-vault">
+  <div class="sec-dark"><div class="sec">
+    <div class="sec-ey">Aftercare Vault</div>
+    <h2 class="sec-h serif">Your Care Guides</h2>
+    <p class="sec-sub">Password-protected for Jess's clients. Your access code was sent with your appointment confirmation.</p>
+  </div></div>
+  <div id="vaultLock">
+    <div class="sec" style="text-align:center;padding-top:2.5rem">
+      <div class="vault-icon-ring">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="5" y="12" width="18" height="13" rx="2" stroke="#ff2e8f" stroke-width="1.5"/>
+          <path d="M9 12V9a5 5 0 0110 0v3" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="14" cy="18" r="2" fill="#ff2e8f" opacity=".5"/>
+        </svg>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;margin-bottom:.4rem">Access Code Required</div>
+      <div style="font-size:.76rem;color:rgba(207,207,207,.32);line-height:1.7">Your code starts with <strong style="color:var(--pink)">JESS</strong></div>
+      <div class="vault-code-row">
+        <input class="vi" type="text" id="vaultInput" placeholder="ENTER CODE" maxlength="8" autocomplete="off" spellcheck="false" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')unlockVault()">
+        <button class="btn-p" style="padding:.8rem 1.25rem;flex-shrink:0" onclick="unlockVault()">→</button>
+      </div>
+      <div class="vault-error" id="vaultError">Incorrect code — try again.</div>
+    </div>
+  </div>
+  <div class="vault-open" id="vaultOpen">
+    <div class="sec" style="padding-bottom:1rem">
+      <div class="unlock-banner"><div class="ub-dot"></div><div class="ub-text"><strong>Vault Unlocked</strong> — Your aftercare guides are ready.</div></div>
+    </div>
+    <div class="pdf-grid">
+      <div class="pdf-card" onclick="dlGuide('Microblading Aftercare')"><div class="pdf-ico">📋</div><div class="pdf-name serif">Microblading Aftercare</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Lash Extension Care')"><div class="pdf-ico">✨</div><div class="pdf-name serif">Lash Extension Care</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Brow Lamination')"><div class="pdf-ico">🌿</div><div class="pdf-name serif">Brow Lamination</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Lip Blush Aftercare')"><div class="pdf-ico">💋</div><div class="pdf-name serif">Lip Blush Aftercare</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Healing Dos and Donts')"><div class="pdf-ico">✅</div><div class="pdf-name serif">Do's &amp; Don'ts</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Touch-Up Prep Guide')"><div class="pdf-ico">🗓</div><div class="pdf-name serif">Touch-Up Prep</div><div class="pdf-badge">PDF Guide</div></div>
+    </div>
+    <div class="sec" style="padding-top:1.5rem"><button class="btn-o btn-full" onclick="lockVault()">🔒 Lock Vault</button></div>
+  </div>
+</div>
+
+<div class="panel" id="panel-diary">
+  <div class="sec-dark"><div class="sec">
+    <div class="sec-ey">Healing Diary</div>
+    <h2 class="sec-h serif">Recovery Timeline</h2>
+    <p class="sec-sub">Enter your procedure date to see your exact Day X status and what to expect.</p>
+  </div></div>
+  <div class="proc-type-row">
+    <button class="pt-btn active" id="pt-mb"   onclick="setProcType('microblading')"><span class="pt-ico">🎨</span>Microblading</button>
+    <button class="pt-btn"        id="pt-lb"   onclick="setProcType('lipblush')"><span class="pt-ico">💋</span>Lip Blush</button>
+    <button class="pt-btn"        id="pt-lash" onclick="setProcType('lashes')"><span class="pt-ico">✨</span>Lash Extensions</button>
+    <button class="pt-btn"        id="pt-bl"   onclick="setProcType('browlam')"><span class="pt-ico">🌿</span>Brow Lamination</button>
+  </div>
+  <div class="date-row">
+    <div class="di-label">Procedure Date</div>
+    <input class="di" type="date" id="procDate" onchange="updateTimeline()" max="">
+  </div>
+  <div class="diary-tl" id="diaryTl">
+    <div class="tl-header">
+      <div class="tl-day-num serif" id="tlDayNum">—</div>
+      <div class="tl-day-sub">Day of Healing</div>
+      <div class="tl-status-name serif" id="tlStatusName"></div>
+      <div class="tl-tip" id="tlTip"></div>
+    </div>
+    <div class="sec-ey" style="padding:1.5rem 1.75rem .25rem">Full Recovery Stages</div>
+    <div class="stage-list" id="stageList"></div>
+  </div>
+</div>
+
+<div class="panel" id="panel-lashmap">
+  <div class="sec-dark"><div class="sec">
+    <div class="sec-ey">Lash Map Profile</div>
+    <h2 class="sec-h serif">Your Lash Blueprint</h2>
+    <p class="sec-sub">Your custom lash map — the exact style and measurements Jess uses for your set.</p>
+  </div></div>
+  <div class="style-grid">
+    <div class="sc active" id="style-cat"      onclick="setStyle('cat')"><div class="sc-ico">😻</div><div class="sc-badge">Style</div><div class="sc-name serif">Cat Eye</div><div class="sc-desc">Longer outer corner, dramatic lift</div></div>
+    <div class="sc"        id="style-doll"     onclick="setStyle('doll')"><div class="sc-ico">👀</div><div class="sc-badge">Style</div><div class="sc-name serif">Doll Eye</div><div class="sc-desc">Longest center, wide open</div></div>
+    <div class="sc"        id="style-natural"  onclick="setStyle('natural')"><div class="sc-ico">🌿</div><div class="sc-badge">Style</div><div class="sc-name serif">Natural</div><div class="sc-desc">Subtle, follows lash line</div></div>
+    <div class="sc"        id="style-squirrel" onclick="setStyle('squirrel')"><div class="sc-ico">✨</div><div class="sc-badge">Style</div><div class="sc-name serif">Squirrel</div><div class="sc-desc">Peak at 3/4, editorial hybrid</div></div>
+  </div>
+  <div class="eye-wrap">
+    <div class="sec-ey" style="margin-bottom:.75rem">Visual Map</div>
+    <svg viewBox="0 0 300 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;width:100%;display:block;margin:0 auto" role="img" aria-label="Eye lash map diagram">
+      <path d="M18 55 Q150 5 282 55 Q150 105 18 55Z" stroke="rgba(255,46,143,0.22)" stroke-width="1" fill="rgba(255,46,143,0.03)"/>
+      <circle cx="150" cy="55" r="26" stroke="rgba(255,46,143,0.3)" stroke-width="1" fill="rgba(255,46,143,0.04)"/>
+      <circle cx="150" cy="55" r="9" fill="rgba(255,46,143,0.1)" stroke="rgba(255,46,143,0.22)" stroke-width="1"/>
+      <line x1="48" y1="38" x2="36" y2="22" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".95"/>
+      <line x1="64" y1="30" x2="54" y2="13" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".9"/>
+      <line x1="82" y1="24" x2="74" y2="7" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+      <line x1="115" y1="17" x2="112" y2=".5" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+      <line x1="138" y1="13" x2="137" y2="-4" stroke="#ff2e8f" stroke-width="2" stroke-linecap="round" opacity=".95"/>
+      <line x1="162" y1="13" x2="163" y2="-4" stroke="#ff2e8f" stroke-width="2" stroke-linecap="round" opacity=".95"/>
+      <line x1="185" y1="17" x2="188" y2=".5" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+      <line x1="218" y1="24" x2="226" y2="7" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".62"/>
+      <line x1="236" y1="30" x2="246" y2="13" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+      <line x1="252" y1="38" x2="264" y2="22" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+      <text x="34" y="20" fill="rgba(255,46,143,.55)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblOuter">14mm</text>
+      <text x="150" y="-7" fill="rgba(255,46,143,.7)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblCenter">13mm</text>
+      <text x="267" y="20" fill="rgba(255,46,143,.38)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblInner">10mm</text>
+    </svg>
+    <div class="eye-labels">
+      <div><span class="eye-lbl-val serif" id="mapStyle">Cat Eye</span><span class="eye-lbl-key">Style</span></div>
+      <div><span class="eye-lbl-val serif" id="mapRange">10–14mm</span><span class="eye-lbl-key">Length</span></div>
+      <div><span class="eye-lbl-val serif" id="mapCurl">C Curl</span><span class="eye-lbl-key">Curl</span></div>
+    </div>
+  </div>
+  <div class="spec-grid">
+    <div class="spec-cell"><div class="spec-lbl">Length</div><div class="spec-val serif" id="specLen">10–14mm</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Curl</div><div class="spec-val serif" id="specCurl">C Curl</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Thickness</div><div class="spec-val serif" id="specThick">0.10mm</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Type</div><div class="spec-val serif" id="specType">Classic</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Material</div><div class="spec-val serif">Mink</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Fill Every</div><div class="spec-val serif">2–3 wks</div></div>
+  </div>
+  <div class="jess-note">
+    <div class="sec-ey" style="margin-bottom:.75rem">Note from Jess</div>
+    <blockquote id="jessNote">"This map was designed for your eye shape. Outer corners carry the longest lengths for maximum lift and drama. 🖤"</blockquote>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<nav class="bnav" aria-label="Main navigation">
+  <button class="nb active" onclick="nav('home')" id="nav-home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    Home
+  </button>
+  <button class="nb" onclick="nav('vault')" id="nav-vault">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+    Vault
+  </button>
+  <button class="nb" onclick="nav('diary')" id="nav-diary">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="12" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg>
+    Diary
+  </button>
+  <button class="nb" onclick="nav('lashmap')" id="nav-lashmap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+    Lash Map
+  </button>
+</nav>
+
+<script>
+function nav(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+(function(){
+  const c=document.getElementById('bgc');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W=0,H=0,t=0,sparks=[];
+  function resize(){const dpr=window.devicePixelRatio||1;const r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);}
+  const mk=()=>({x:Math.random()*W,y:Math.random()*H,sz:Math.random()*1.4+.3,spd:.002+Math.random()*.004,drift:(Math.random()-.5)*.3,life:0});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const g=ctx.createRadialGradient(W*.5,H*.38,0,W*.5,H*.38,Math.min(W,H)*.55);
+    g.addColorStop(0,'rgba(255,46,143,.07)');g.addColorStop(.5,'rgba(255,46,143,.03)');g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    for(let w=0;w<3;w++){ctx.beginPath();const amp=18+w*8,freq=.003-w*.0005,ph=t*(.4+w*.15)+w*2.1,by=H*(.35+w*.08);ctx.moveTo(0,by);for(let x=0;x<=W;x+=4)ctx.lineTo(x,by+Math.sin(x*freq+ph)*amp);ctx.strokeStyle='rgba(255,46,143,'+(0.04-w*0.01)+')';ctx.lineWidth=1+w*.5;ctx.stroke();}
+    sparks.forEach((s,i)=>{s.life+=s.spd;s.x+=s.drift;const p=Math.sin(s.life*Math.PI);if(s.life>=1||s.x<-5||s.x>W+5){sparks[i]=mk();return;}ctx.beginPath();ctx.arc(s.x,s.y,s.sz*p,0,Math.PI*2);ctx.fillStyle='rgba('+(Math.random()>.5?'255,46,143':'207,207,207')+','+p*.6+')';ctx.fill();});
+    t+=.02;requestAnimationFrame(draw);
+  }
+  window.addEventListener('load',()=>{requestAnimationFrame(()=>{resize();for(let i=0;i<55;i++)sparks.push(mk());draw();});});
+  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{resize();sparks=[];for(let i=0;i<55;i++)sparks.push(mk());},150);});
+})();
+(function(){const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);const standalone=window.matchMedia('(display-mode:standalone)').matches||navigator.standalone;try{if(isIOS&&!standalone&&!localStorage.getItem('rbxj_ib'))document.getElementById('installBar').classList.add('show');}catch(e){}})();
+function dismissInstall(){document.getElementById('installBar').classList.remove('show');try{localStorage.setItem('rbxj_ib','1');}catch(e){}}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',3200);}
+const VAULT_CODE='JESS2026';
+(function(){try{if(sessionStorage.getItem('rbxj_v')==='1')_openVault();}catch(e){}})();
+function unlockVault(){const val=document.getElementById('vaultInput').value.trim().toUpperCase();const err=document.getElementById('vaultError');if(val===VAULT_CODE){err.classList.remove('show');_openVault();try{sessionStorage.setItem('rbxj_v','1');}catch(e){}}else{err.classList.add('show');const lock=document.getElementById('vaultLock');lock.style.animation='none';void lock.offsetHeight;lock.style.animation='shake .4s ease';}}
+function _openVault(){document.getElementById('vaultLock').style.display='none';document.getElementById('vaultOpen').classList.add('show');}
+function lockVault(){document.getElementById('vaultLock').style.display='block';document.getElementById('vaultOpen').classList.remove('show');document.getElementById('vaultInput').value='';try{sessionStorage.removeItem('rbxj_v');}catch(e){}}
+function dlGuide(name){showToast('📄 '+name+' — Add your PDF to the /pdfs/ folder to enable download.');}
+const _ks=document.createElement('style');_ks.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';document.head.appendChild(_ks);
+let procType='microblading';
+document.getElementById('procDate').max=new Date().toISOString().split('T')[0];
+const PT_MAP={microblading:'mb',lipblush:'lb',lashes:'lash',browlam:'bl'};
+const STAGES={
+  microblading:[
+    {range:'Day 1–2',name:'Fresh & Bright',desc:'Brows appear bold and saturated. Slight redness normal. Keep dry, apply aftercare balm lightly.',b:[0,2]},
+    {range:'Day 3–4',name:'Darkening & Bold',desc:'Color deepens to darkest shade. May feel tight or itchy — do NOT scratch.',b:[3,4]},
+    {range:'Day 5–7',name:'Peeling Begins',desc:'Skin begins to flake. Never pick — this lifts pigment. Let it fall off naturally.',b:[5,7]},
+    {range:'Day 8–14',name:'Ghost Phase',desc:'Brows look faded or patchy — totally normal! Pigment is settling under new skin.',b:[8,14]},
+    {range:'Day 15–30',name:'Color Returning',desc:'True color begins to resurface. Brows appear softer and more natural.',b:[15,30]},
+    {range:'Week 6–8',name:'Touch-Up Ready',desc:'Book your touch-up to perfect shape, color, and fill any gaps. Final result!',b:[31,999]},
+  ],
+  lipblush:[
+    {range:'Day 1–2',name:'Swollen & Vivid',desc:'Lips appear swollen and very bright. Apply balm every 1–2 hrs. Avoid kissing.',b:[0,2]},
+    {range:'Day 3–5',name:'Chapping & Peeling',desc:'Lips feel dry and begin to peel. Do NOT peel — keep them moisturized.',b:[3,5]},
+    {range:'Day 6–10',name:'Ghost Phase',desc:'Color fades dramatically — looks almost gone. 100% normal!',b:[6,10]},
+    {range:'Day 11–21',name:'Color Emerging',desc:'True soft blush tone begins to surface. Avoid exfoliation.',b:[11,21]},
+    {range:'Week 4–6',name:'Settled & Soft',desc:'Final color has settled. Lips look beautifully tinted and natural.',b:[22,42]},
+    {range:'Week 6–8',name:'Touch-Up Time',desc:'Book your perfecting touch-up for even saturation.',b:[43,999]},
+  ],
+  lashes:[
+    {range:'First 24 hrs',name:'No Water Zone',desc:'Keep lashes completely dry. No steam, sweat, or face wash near eyes.',b:[0,1]},
+    {range:'Day 2–7',name:'Breaking In',desc:'Avoid rubbing, oil-based products, or sleeping face-down.',b:[2,7]},
+    {range:'Week 2',name:'First Natural Shed',desc:'A few extensions may fall with natural lash shed. Completely normal.',b:[8,14]},
+    {range:'Week 3',name:'Fill Window',desc:'Best time to book your fill is 2–3 weeks after application.',b:[15,21]},
+    {range:'Week 4+',name:'Fill Required',desc:'Most sets need a fill after 4 weeks. Fills every 2–3 weeks maintain fullness.',b:[22,999]},
+  ],
+  browlam:[
+    {range:'First 24 hrs',name:'Setting Period',desc:'Keep brows completely dry for 24 hours. No washing, steam, or sweat.',b:[0,1]},
+    {range:'Day 2–3',name:'Daily Brushing',desc:'Brush brows upward every morning. May look stiff — this softens over time.',b:[2,3]},
+    {range:'Week 1–2',name:'Full Results',desc:'Brows settle into lifted position. Avoid heavy oils on treated area.',b:[4,14]},
+    {range:'Week 3–6',name:'Peak Results',desc:'Enjoy your full, fluffy brow look! Results last 4–8 weeks.',b:[15,42]},
+    {range:'Week 6–8',name:'Re-Book Time',desc:'Lamination is relaxing. Time to re-book and maintain the fluffy look.',b:[43,999]},
+  ]
+};
+function setProcType(type){procType=type;document.querySelectorAll('.pt-btn').forEach(b=>b.classList.remove('active'));const btn=document.getElementById('pt-'+(PT_MAP[type]||type));if(btn)btn.classList.add('active');updateTimeline();}
+function updateTimeline(){
+  const val=document.getElementById('procDate').value;if(!val)return;
+  const proc=new Date(val+'T00:00:00');const today=new Date();today.setHours(0,0,0,0);
+  const day=Math.floor((today-proc)/(864e5));
+  const tl=document.getElementById('diaryTl');tl.classList.add('show');
+  if(day<0){document.getElementById('tlDayNum').textContent='—';document.getElementById('tlStatusName').textContent='Procedure hasn\'t happened yet!';document.getElementById('tlTip').textContent='Check back on your appointment day.';document.getElementById('stageList').innerHTML='';return;}
+  document.getElementById('tlDayNum').textContent='Day '+day;
+  const stages=STAGES[procType];let cur=stages.length-1;
+  for(let i=0;i<stages.length;i++){if(day>=stages[i].b[0]&&day<=stages[i].b[1]){cur=i;break;}}
+  document.getElementById('tlStatusName').textContent=stages[cur].name;
+  document.getElementById('tlTip').textContent=stages[cur].desc;
+  const list=document.getElementById('stageList');list.innerHTML='';
+  stages.forEach((s,i)=>{const el=document.createElement('div');el.className='stage-item'+(i===cur?' current':i<cur?' past':'');el.innerHTML=`<div class="stage-dot"></div><div><div class="stage-range">${s.range}</div><div class="stage-name serif">${s.name}</div><div class="stage-desc">${s.desc}</div></div>`;list.appendChild(el);});
+}
+const STYLES={
+  cat:{label:'Cat Eye',range:'10–14mm',curl:'C Curl',thick:'0.10mm',type:'Classic',outer:'14mm',center:'13mm',inner:'10mm',note:'"This map was designed for your eye shape. Outer corners carry the longest lengths for maximum lift and drama. 🖤"'},
+  doll:{label:'Doll Eye',range:'11–14mm',curl:'CC Curl',thick:'0.07mm',type:'Volume',outer:'12mm',center:'14mm',inner:'11mm',note:'"Center-weighted for that wide-eyed open look. Your natural almond shape carries this beautifully. 🌸"'},
+  natural:{label:'Natural',range:'9–12mm',curl:'B Curl',thick:'0.10mm',type:'Classic',outer:'11mm',center:'12mm',inner:'9mm',note:'"A polished set that enhances your natural lashes. Perfect for everyday wear. 🌿"'},
+  squirrel:{label:'Squirrel',range:'10–15mm',curl:'D Curl',thick:'0.07mm',type:'Hybrid',outer:'13mm',center:'15mm',inner:'10mm',note:'"Peak length at the 3/4 mark for a lifted, editorial effect. ✨"'},
+};
+function setStyle(s){const d=STYLES[s];document.querySelectorAll('.sc').forEach(c=>c.classList.remove('active'));document.getElementById('style-'+s).classList.add('active');document.getElementById('mapStyle').textContent=d.label;document.getElementById('mapRange').textContent=d.range;document.getElementById('mapCurl').textContent=d.curl;document.getElementById('specLen').textContent=d.range;document.getElementById('specCurl').textContent=d.curl;document.getElementById('specThick').textContent=d.thick;document.getElementById('specType').textContent=d.type;document.getElementById('jessNote').textContent=d.note;document.getElementById('lblOuter').textContent=d.outer;document.getElementById('lblCenter').textContent=d.center;document.getElementById('lblInner').textContent=d.inner;}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW:',e)));}
+</script>
 </body>
 </html>
