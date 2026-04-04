@@ -1,0 +1,29 @@
+# Environment & Secrets — NEVER commit these
+.env
+.env.local
+.env.production
+.env.*
+*.env
+
+# API key files
+secrets.json
+config.secret.js
+keys.js
+
+# Node / package artifacts (if you add a back-end later)
+node_modules/
+.netlify/
+.vercel/
+functions/.env
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build output (if you add a bundler)
+dist/
+build/

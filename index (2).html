@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#060408">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RBXJess">
+<meta name="description" content="RealBeautyXJess — Luxury Lashes & Brows · Los Angeles">
+<title>RealBeautyXJess — Luxury Lashes & Brows · Los Angeles</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff2e8f;--pink2:#ff5fa2;--chrome:#cfcfcf;--dark:#060408;--card:#0c080f;--safe-top:env(safe-area-inset-top);--safe-bot:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;padding-top:var(--safe-top);padding-bottom:calc(68px + var(--safe-bot))}
+.serif{font-family:'Cormorant Garamond',serif}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,46,143,.2);border-radius:2px}
+.panel{display:none;animation:fadeUp .3s ease}.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.bnav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:.6rem 0 calc(.6rem + var(--safe-bot));background:rgba(6,4,8,.97);border-top:1px solid rgba(207,207,207,.08);z-index:300;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nb{display:flex;flex-direction:column;align-items:center;gap:.22rem;background:none;border:none;cursor:pointer;color:rgba(207,207,207,.28);font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;padding:.15rem .5rem;flex:1}
+.nb.active{color:var(--pink)}.nb svg{width:19px;height:19px;transition:transform .18s}.nb.active svg{transform:scale(1.12)}
+.top-nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid rgba(207,207,207,.08);background:rgba(6,4,8,.96);position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;letter-spacing:.12em;color:var(--pink);font-weight:400}
+.top-nav-links{display:flex;gap:1rem;align-items:center}
+.tnl{background:none;border:none;color:rgba(207,207,207,.45);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:color .2s}
+.tnl:hover{color:var(--pink)}.tnl.cta{border:1px solid var(--pink);color:var(--pink);padding:.3rem .9rem}.tnl.cta:hover{background:var(--pink);color:#000}
+.hero-wrap{position:relative;overflow:hidden;min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 1.5rem 3.5rem}
+#bgc{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;display:block}
+.hero-inner{position:relative;z-index:1}
+.eyebrow-line{display:flex;align-items:center;gap:1rem;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(207,207,207,.4);margin-bottom:1.75rem;justify-content:center}
+.el{flex:1;max-width:70px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,46,143,.35))}.elr{background:linear-gradient(90deg,rgba(255,46,143,.35),transparent)}
+h1.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,6rem);font-weight:300;line-height:1;color:#fff;margin-bottom:.5rem}
+h1.hero-h1 em{font-style:italic;color:var(--pink)}
+.hero-sub{font-size:clamp(.82rem,1.8vw,.95rem);color:rgba(207,207,207,.45);letter-spacing:.05em;max-width:420px;line-height:1.85;margin:1.25rem auto 2.5rem}
+.btn-row{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--pink);color:#000;border:none;padding:.8rem 2.2rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-weight:500;border-radius:1px;transition:all .25s;font-family:'Inter',sans-serif}
+.btn-p:hover{background:var(--pink2);transform:translateY(-2px)}.btn-p:active{transform:translateY(0)}
+.btn-o{background:transparent;color:var(--chrome);border:1px solid rgba(207,207,207,.25);padding:.8rem 2.2rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border-radius:1px;transition:all .25s;font-family:'Inter',sans-serif}
+.btn-o:hover{border-color:var(--pink);color:var(--pink)}.btn-full{width:100%}
+.scroll-hint{margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:.45rem;opacity:.2}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--chrome),transparent)}.scroll-txt{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase}
+.sec{padding:4rem 1.5rem;max-width:1100px;margin:0 auto}
+.sec-dark{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05)}
+.sec-ey{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--pink);margin-bottom:.85rem;opacity:.8}
+.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,4.5vw,3.2rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:.6rem}
+.sec-sub{font-size:.8rem;color:rgba(207,207,207,.35);letter-spacing:.04em;margin-bottom:2.5rem;line-height:1.8}
+.cr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,46,143,.3) 30%,rgba(207,207,207,.2) 50%,rgba(255,46,143,.3) 70%,transparent);margin:2rem auto}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(207,207,207,.06)}
+.sc{background:var(--card);padding:2rem 1.5rem;transition:all .3s;border:1px solid transparent;cursor:pointer}
+.sc:hover{background:#130a18;border-color:var(--pink);transform:translateY(-4px)}
+.sc-badge{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);opacity:.7;margin-bottom:.8rem}
+.sc-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:#fff;margin-bottom:.6rem}
+.sc-price{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:300;color:var(--pink);line-height:1}
+.sc-desc{font-size:.73rem;color:rgba(207,207,207,.3);margin-top:.6rem;line-height:1.7}
+.gal-grid{columns:2;gap:5px;column-gap:5px}
+@media(min-width:600px){.gal-grid{columns:3}}
+.gi{break-inside:avoid;margin-bottom:5px;overflow:hidden;position:relative;cursor:pointer;transition:transform .25s}
+.gi:hover{transform:scale(1.015)}.gi:hover .gb{opacity:1}
+.gb{position:absolute;inset:0;border:1.5px solid var(--pink);opacity:0;transition:opacity .2s;pointer-events:none}
+.gph{width:100%;background:#0d080f;border:1px solid rgba(207,207,207,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+.gph-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.18)}
+.preview-banner{background:rgba(255,46,143,.04);border:1px solid rgba(255,46,143,.15);border-radius:1px;padding:.8rem 1.1rem;margin-bottom:1.75rem;display:flex;align-items:center;gap:.8rem}
+.pb-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;animation:pls 2s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.3}}
+.pb-text{font-size:.7rem;color:rgba(207,207,207,.45);letter-spacing:.03em;line-height:1.6}.pb-text strong{color:var(--pink)}
+.bk-wrap{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:640px){.bk-wrap{grid-template-columns:1.25fr 1fr;gap:3rem}}
+.step-bar{display:flex;align-items:center;margin-bottom:2rem}
+.sn{width:28px;height:28px;border-radius:50%;border:1px solid rgba(207,207,207,.2);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(207,207,207,.4);flex-shrink:0;transition:all .25s}
+.sn.on{border-color:var(--pink);background:var(--pink);color:#000}.sn.dn{border-color:var(--pink);color:var(--pink)}
+.sl{flex:1;height:1px;background:rgba(207,207,207,.1)}.sl-lbl{font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(207,207,207,.25);flex-shrink:0;padding:0 .4rem}
+.bp{display:none}.bp.on{display:block}
+.sp{border:1px solid rgba(207,207,207,.09);padding:.85rem 1.1rem;margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all .2s;border-radius:1px}
+.sp:hover,.sp.sel{border-color:var(--pink);background:#130a18}
+.sp-name{font-size:.8rem;color:rgba(207,207,207,.65)}.sp-price{font-family:'Cormorant Garamond',serif;color:var(--pink);font-size:1.05rem}
+.cal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.cal-hd span{font-size:.8rem;letter-spacing:.06em;color:rgba(207,207,207,.5)}
+.cnb{background:none;border:1px solid rgba(207,207,207,.12);color:rgba(207,207,207,.45);width:26px;height:26px;cursor:pointer;border-radius:1px;transition:all .2s;font-size:.9rem}
+.cnb:hover{border-color:var(--pink);color:var(--pink)}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;margin-bottom:1.25rem}
+.cdl{font-size:.55rem;color:rgba(207,207,207,.2);letter-spacing:.08em;text-transform:uppercase;padding:.2rem 0}
+.cd{font-size:.74rem;padding:.35rem;cursor:pointer;border-radius:1px;color:rgba(207,207,207,.44);transition:all .14s;text-align:center}
+.cd:hover:not(.cx){background:#1a0a20;color:var(--pink)}.cd.cs{background:var(--pink);color:#000;font-weight:500}.cd.cx{color:rgba(207,207,207,.12);cursor:not-allowed}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin-top:.7rem}
+.tb{border:1px solid rgba(207,207,207,.1);padding:.45rem;font-size:.68rem;color:rgba(207,207,207,.45);cursor:pointer;transition:all .2s;border-radius:1px;text-align:center;background:none;font-family:'Inter',sans-serif}
+.tb:hover,.tb.sel{border-color:var(--pink);color:var(--pink)}
+.ri{width:100%;background:#0a0610;border:1px solid rgba(207,207,207,.1);color:#fff;padding:.75rem 1rem;font-size:.8rem;margin-bottom:.65rem;border-radius:1px;font-family:'Inter',sans-serif;font-weight:300;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.ri:focus{border-color:var(--pink)}.ri::placeholder{color:rgba(207,207,207,.18)}
+.bk-sum{background:#0c080f;border:1px solid rgba(207,207,207,.08);padding:2rem;border-radius:1px}
+.sum-row{padding:.65rem 0;border-bottom:1px solid rgba(207,207,207,.05)}
+.sum-lbl{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.2);margin-bottom:.28rem}
+.sum-val{font-size:.85rem;color:rgba(207,207,207,.65)}.sum-total{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--pink);font-weight:300}
+.conf-box{background:#0a0610;border:1px solid rgba(255,46,143,.25);padding:1.1rem;border-radius:1px;margin-top:1rem;text-align:center;display:none}
+.conf-box p{font-size:.78rem;color:rgba(207,207,207,.55);line-height:1.7}.conf-box strong{color:var(--pink)}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.25rem}
+.pc{background:var(--card);border:1px solid rgba(207,207,207,.07);padding:1.75rem 1.25rem;text-align:center;transition:all .25s;border-radius:1px}
+.pc:hover{border-color:var(--pink);transform:translateY(-3px)}
+.pc-ico{width:48px;height:48px;border:1px solid rgba(255,46,143,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.pc-name{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(207,207,207,.44);margin-bottom:.6rem}
+.pc-price{font-family:'Cormorant Garamond',serif;font-size:1.85rem;color:var(--pink);font-weight:300}
+.pc-btn{margin-top:.85rem;background:transparent;border:1px solid rgba(207,207,207,.12);color:rgba(207,207,207,.35);padding:.35rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;width:100%;transition:all .2s;border-radius:1px;font-family:'Inter',sans-serif}
+.pc-btn:hover{border-color:var(--pink);color:var(--pink)}
+.about-g{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media(min-width:640px){.about-g{grid-template-columns:1fr 1fr;gap:4rem;align-items:center}}
+.about-img{aspect-ratio:3/4;background:#0c080f;border:1px solid rgba(207,207,207,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:1px;gap:.7rem}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:rgba(207,207,207,.65);line-height:1.55;padding-left:1.25rem;border-left:2px solid var(--pink);margin-bottom:1.75rem}
+.about-body{font-size:.82rem;color:rgba(207,207,207,.35);line-height:2;margin-bottom:1.1rem}
+.stat-row{display:flex;gap:2.5rem;margin-top:1.75rem;padding-top:1.75rem;border-top:1px solid rgba(207,207,207,.07)}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:var(--pink);font-weight:300}
+.stat-l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.22);margin-top:.2rem}
+footer{border-top:1px solid rgba(207,207,207,.07);padding:3.5rem 1.5rem;text-align:center;background:#030205}
+.ft-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--pink);font-weight:300;margin-bottom:.4rem}
+.ft-sub{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.18);margin-bottom:1.75rem}
+.ft-links{display:flex;gap:1.75rem;justify-content:center;margin-bottom:1.75rem;flex-wrap:wrap}
+.ft-links a,.ft-links button{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.25);text-decoration:none;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;transition:color .2s}
+.ft-links a:hover,.ft-links button:hover{color:var(--pink)}.ft-fine{font-size:.58rem;color:rgba(207,207,207,.12);letter-spacing:.06em}
+/* portal */
+.vault-ring{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,46,143,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem;background:rgba(255,46,143,.04)}
+.vault-code-row{display:flex;gap:.5rem;margin:1.2rem 0 .45rem}
+.vi{flex:1;background:#0a0610;border:1px solid rgba(207,207,207,.1);border-radius:1px;color:#fff;font-family:'Inter',sans-serif;font-size:.9rem;letter-spacing:.22em;text-align:center;padding:.78rem 1rem;outline:none;transition:border-color .2s}
+.vi:focus{border-color:var(--pink)}.vi::placeholder{color:rgba(207,207,207,.16);letter-spacing:.06em;font-size:.7rem}
+.vault-error{font-size:.68rem;color:#ff6b6b;text-align:center;margin-top:.4rem;opacity:0;transition:opacity .25s}.vault-error.show{opacity:1}
+.vault-open{display:none}.vault-open.show{display:block;animation:fadeUp .35s ease}
+.unlock-banner{display:flex;align-items:center;gap:.8rem;background:rgba(255,46,143,.04);border:1px solid rgba(255,46,143,.15);border-radius:1px;padding:.8rem 1.1rem;margin-bottom:1.75rem}
+.ub-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;animation:pls 2s infinite}
+.ub-text{font-size:.7rem;color:rgba(207,207,207,.45);line-height:1.6}.ub-text strong{color:var(--pink)}
+.pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.pdf-card{background:var(--card);padding:1.75rem 1.1rem;cursor:pointer;transition:all .25s;border:1px solid transparent;text-align:center}
+.pdf-card:hover{background:#130a18;border-color:var(--pink);transform:translateY(-3px)}
+.pdf-ico{font-size:1.4rem;margin-bottom:.55rem}.pdf-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#fff;margin-bottom:.35rem}
+.pdf-badge{font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);opacity:.6}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.proc-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.pt-btn{background:var(--card);padding:1rem;border:1px solid transparent;cursor:pointer;font-family:'Inter',sans-serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(207,207,207,.32);transition:all .2s;text-align:center}
+.pt-btn.active{background:#130a18;border-color:var(--pink);color:var(--pink)}.pt-ico{display:block;font-size:1rem;margin-bottom:.28rem}
+.date-row{background:var(--card);border-bottom:1px solid rgba(207,207,207,.05);padding:1.4rem 1.5rem}
+.di-label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(207,207,207,.22);margin-bottom:.55rem}
+.di{width:100%;background:#0a0610;border:1px solid rgba(207,207,207,.1);color:#fff;font-family:'Inter',sans-serif;font-size:.85rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;border-radius:1px;-webkit-appearance:none;color-scheme:dark}
+.di:focus{border-color:var(--pink)}
+.diary-tl{display:none}.diary-tl.show{display:block;animation:fadeUp .35s ease}
+.tl-header{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:2.25rem 1.5rem;text-align:center}
+.tl-day-num{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:var(--pink);line-height:1}
+.tl-day-sub{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(207,207,207,.25);margin:.25rem 0 .75rem}
+.tl-status{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:#fff;margin-bottom:.45rem}
+.tl-tip{font-size:.76rem;color:rgba(207,207,207,.33);line-height:1.75;max-width:290px;margin:0 auto}
+.stage-list{padding:0 1.5rem}
+.stage-item{display:flex;gap:.9rem;padding:1rem 0;border-bottom:1px solid rgba(207,207,207,.05)}.stage-item:last-child{border-bottom:none}
+.sdot{width:9px;height:9px;border-radius:50%;background:rgba(207,207,207,.1);flex-shrink:0;margin-top:3px}
+.stage-item.past .sdot{background:rgba(255,46,143,.35)}.stage-item.current .sdot{background:var(--pink);box-shadow:0 0 8px rgba(255,46,143,.5)}
+.s-range{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.18);margin-bottom:.2rem}
+.s-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(207,207,207,.5);margin-bottom:.18rem}.stage-item.current .s-name{color:#fff}
+.s-desc{font-size:.7rem;color:rgba(207,207,207,.24);line-height:1.6}.stage-item.current .s-desc{color:rgba(207,207,207,.38)}
+.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(207,207,207,.06)}
+.sm-card{background:var(--card);padding:1.4rem 1.1rem;transition:all .3s;border:1px solid transparent;cursor:pointer;text-align:center}
+.sm-card:hover,.sm-card.active{background:#130a18;border-color:var(--pink)}
+.sm-ico{font-size:1.15rem;margin-bottom:.35rem}.sm-badge{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);opacity:.6;margin-bottom:.3rem}
+.sm-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#fff;margin-bottom:.25rem}.sm-desc{font-size:.63rem;color:rgba(207,207,207,.24);line-height:1.45}
+.eye-wrap{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:1.85rem 1.5rem;text-align:center}
+.eye-labels{display:flex;justify-content:space-around;margin-top:1.1rem}
+.elv{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--pink);font-weight:300;display:block}.elk{font-size:.53rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.18)}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(207,207,207,.06)}
+.spec-cell{background:var(--card);padding:1.1rem .9rem;text-align:center}
+.spec-lbl{font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(207,207,207,.18);margin-bottom:.35rem}
+.spec-val{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--pink);font-weight:300}
+.jess-note-sec{background:rgba(10,6,14,.65);border-top:1px solid rgba(207,207,207,.05);border-bottom:1px solid rgba(207,207,207,.05);padding:1.85rem 1.5rem}
+.jess-note-sec blockquote{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(207,207,207,.5);line-height:1.75;padding-left:1.2rem;border-left:2px solid var(--pink)}
+.install-bar{display:none;background:rgba(255,46,143,.04);border-bottom:1px solid rgba(255,46,143,.12);padding:.8rem 1.5rem}
+.install-bar.show{display:block}.ib-row{display:flex;align-items:center;gap:.7rem}
+.ib-title{font-size:.7rem;color:rgba(207,207,207,.5);flex:1}.ib-close{font-size:.85rem;color:rgba(207,207,207,.18);background:none;border:none;cursor:pointer}
+.ib-sub{font-size:.62rem;color:rgba(207,207,207,.18);margin-top:.25rem;padding-left:1.8rem;line-height:1.5}
+#toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:rgba(12,8,15,.97);border:1px solid rgba(255,46,143,.2);color:rgba(207,207,207,.7);padding:.68rem 1.2rem;font-size:.72rem;letter-spacing:.04em;line-height:1.5;border-radius:1px;z-index:500;text-align:center;max-width:88vw;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(12px)}
+</style>
+</head>
+<body>
+
+<div class="install-bar" id="installBar">
+  <div class="ib-row">
+    <span style="font-size:1rem">📲</span>
+    <span class="ib-title">Add to Home Screen for the full app experience</span>
+    <button class="ib-close" onclick="dismissInstall()" aria-label="Dismiss">✕</button>
+  </div>
+  <div class="ib-sub">Tap Share → "Add to Home Screen"</div>
+</div>
+
+<!-- HOME -->
+<div class="panel active" id="panel-home">
+  <nav class="top-nav">
+    <div class="logo serif">RealBeautyXJess</div>
+    <div class="top-nav-links">
+      <button class="tnl" onclick="scrollTo('svc')">Services</button>
+      <button class="tnl" onclick="scrollTo('gal')">Gallery</button>
+      <button class="tnl" onclick="scrollTo('abt')">About</button>
+      <button class="tnl cta" onclick="nav('booking')">Book Now</button>
+    </div>
+  </nav>
+  <div class="hero-wrap">
+    <canvas id="bgc"></canvas>
+    <div class="hero-inner">
+      <div class="eyebrow-line"><div class="el"></div>Los Angeles · CA<div class="el elr"></div></div>
+      <h1 class="hero-h1 serif">Real Beauty<br><em>by Jess</em></h1>
+      <p class="hero-sub">Luxury lashes for high-maintenance girls who know their worth.</p>
+      <div class="btn-row">
+        <button class="btn-p" onclick="nav('booking')">Book Now</button>
+        <button class="btn-o" onclick="scrollTo('gal')">View Gallery</button>
+      </div>
+      <div class="scroll-hint"><div class="scroll-line"></div><span class="scroll-txt">Scroll</span></div>
+    </div>
+  </div>
+  <div class="sec-dark" id="svc"><div class="sec">
+    <div class="sec-ey">The Menu</div>
+    <h2 class="sec-h serif">Services &amp; Pricing</h2>
+    <p class="sec-sub">Precision-crafted every time. No shortcuts. No compromise.</p>
+    <div class="svc-grid">
+      <div class="sc"><div class="sc-badge">Lashes</div><div class="sc-name serif">Classic Set</div><div class="sc-price">$100</div><div class="sc-desc">Defined lash-by-lash application for an elevated everyday look.</div></div>
+      <div class="sc"><div class="sc-badge">Lashes</div><div class="sc-name serif">Hybrid Set</div><div class="sc-price">$115</div><div class="sc-desc">Classic meets volume — texture, depth, and dimension.</div></div>
+      <div class="sc"><div class="sc-badge">Lashes</div><div class="sc-name serif">Volume Set</div><div class="sc-price">$130</div><div class="sc-desc">Full-glam mega-fluffy fans. Drama, delivered.</div></div>
+      <div class="sc"><div class="sc-badge">Brows</div><div class="sc-name serif">Microblading</div><div class="sc-price">$450</div><div class="sc-desc">Includes touch-up. Hairlike strokes for natural perfection.</div></div>
+      <div class="sc"><div class="sc-badge">Brows</div><div class="sc-name serif">Brow Lamination</div><div class="sc-price">$50</div><div class="sc-desc">Fluffy, brushed-up brows that last weeks.</div></div>
+      <div class="sc"><div class="sc-badge">Add-on</div><div class="sc-name serif">Eyebrow Wax</div><div class="sc-price">$20</div><div class="sc-desc">Clean shaping and a refined arch.</div></div>
+      <div class="sc"><div class="sc-badge">Add-on</div><div class="sc-name serif">Lash Bath</div><div class="sc-price">$12</div><div class="sc-desc">Deep-clean treatment to extend retention.</div></div>
+      <div class="sc" style="border-color:rgba(255,46,143,.18)"><div class="sc-badge">Training</div><div class="sc-name serif">1:1 Lash Training</div><div class="sc-price">$950</div><div class="sc-desc">Private mentorship for artists ready to level up.</div></div>
+    </div>
+  </div></div>
+  <div id="gal" style="padding:4rem 1.5rem"><div style="max-width:1100px;margin:0 auto">
+    <div class="sec-ey">The Work</div>
+    <h2 class="sec-h serif">Gallery</h2>
+    <p class="sec-sub">Real clients. Real results. No filter needed.</p>
+    <div class="preview-banner"><div class="pb-dot"></div><p class="pb-text"><strong>Preview mode</strong> — Real client photos will fill this grid once added.</p></div>
+    <div class="gal-grid" id="galGrid"></div>
+  </div></div>
+  <div class="sec-dark" id="abt"><div class="sec">
+    <div class="about-g">
+      <div class="about-img" role="img" aria-label="Photo of Jess">
+        <svg width="36" height="36" viewBox="0 0 38 38" fill="none" style="opacity:.16" aria-hidden="true"><circle cx="19" cy="14" r="7" stroke="#ff2e8f" stroke-width="1"/><path d="M4 34c0-8.284 6.716-15 15-15s15 6.716 15 15" stroke="#ff2e8f" stroke-width="1"/></svg>
+        <span style="font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.16)">Photo of Jess</span>
+      </div>
+      <div>
+        <div class="sec-ey">The Artist</div>
+        <h2 class="sec-h serif">About Jess</h2>
+        <div class="about-quote serif">"Beauty is confidence you wear every day — I just help it show."</div>
+        <p class="about-body">Based in Los Angeles, Jess is a luxury lash and brow artist specializing in precision extensions, microblading, and brow artistry. Every appointment is a private, one-on-one experience tailored to your natural features.</p>
+        <p class="about-body">Jess is also a certified lash trainer — offering 1:1 mentorship for artists ready to build their brand and elevate their technique.</p>
+        <div class="stat-row">
+          <div><div class="stat-n">500+</div><div class="stat-l">Clients</div></div>
+          <div><div class="stat-n">5&#9733;</div><div class="stat-l">Rating</div></div>
+          <div><div class="stat-n">LA</div><div class="stat-l">Based</div></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <div id="shop" style="padding:4rem 1.5rem"><div style="max-width:1100px;margin:0 auto">
+    <div class="sec-ey">The Shop</div>
+    <h2 class="sec-h serif">Professional Products</h2>
+    <p class="sec-sub">The tools Jess uses. Available for purchase.</p>
+    <div class="prod-grid">
+      <div class="pc"><div class="pc-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6" stroke="#ff2e8f" stroke-width="1"/><circle cx="10" cy="10" r="2" fill="#ff2e8f"/></svg></div><div class="pc-name">Lash Glue</div><div class="pc-price">$30</div><button class="pc-btn">Add to Order</button></div>
+      <div class="pc"><div class="pc-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 2L14 18M14 2L6 18" stroke="#ff2e8f" stroke-width="1" stroke-linecap="round"/></svg></div><div class="pc-name">Tweezers</div><div class="pc-price">$15</div><button class="pc-btn">Add to Order</button></div>
+      <div class="pc"><div class="pc-ico"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="7" width="14" height="8" rx="1" stroke="#ff2e8f" stroke-width="1"/><path d="M7 7V5a3 3 0 016 0v2" stroke="#ff2e8f" stroke-width="1"/></svg></div><div class="pc-name">Lash Trays</div><div class="pc-price">$7</div><button class="pc-btn">Add to Order</button></div>
+    </div>
+  </div></div>
+  <footer>
+    <div class="cr"></div>
+    <div class="ft-logo serif">RealBeautyXJess</div>
+    <div class="ft-sub">Los Angeles, CA &middot; High-Maintenance, On Purpose</div>
+    <div class="ft-links">
+      <a href="https://instagram.com/realbeautyxjess" target="_blank" rel="noopener noreferrer">@realbeautyxjess</a>
+      <button onclick="nav('booking')">Book Now</button>
+      <button onclick="scrollTo('svc')">Services</button>
+      <button onclick="scrollTo('gal')">Gallery</button>
+    </div>
+    <p class="ft-fine">Sun &amp; Mon closed &middot; By appointment only &middot; &copy; 2026 RealBeautyXJess</p>
+  </footer>
+</div>
+
+<!-- BOOKING -->
+<div class="panel" id="panel-booking">
+  <nav class="top-nav">
+    <button class="tnl" onclick="nav('home')" style="color:rgba(207,207,207,.4);font-size:.65rem">&#8592; Back</button>
+    <div class="logo serif" style="font-size:1rem">Book Appointment</div>
+    <div style="width:60px"></div>
+  </nav>
+  <div class="sec-dark" style="padding:2rem 1.5rem">
+    <div class="sec-ey">Reserve Your Spot</div>
+    <h2 class="sec-h serif">Book an Appointment</h2>
+    <p class="sec-sub">Sun &amp; Mon closed. By appointment only.</p>
+  </div>
+  <div style="padding:1.5rem;max-width:1100px;margin:0 auto">
+    <div class="bk-wrap">
+      <div>
+        <div class="step-bar">
+          <div class="sn on" id="sn1">1</div><div class="sl"></div>
+          <span class="sl-lbl">Service</span><div class="sl"></div>
+          <div class="sn" id="sn2">2</div><div class="sl"></div>
+          <span class="sl-lbl">Date &amp; Time</span><div class="sl"></div>
+          <div class="sn" id="sn3">3</div><div class="sl"></div>
+          <span class="sl-lbl">Your Info</span>
+        </div>
+        <div class="bp on" id="bp1">
+          <p style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.25);margin-bottom:.85rem">Choose your service</p>
+          <div id="svcList"></div>
+          <button class="btn-p" style="margin-top:1.1rem;width:100%" onclick="goStep(2)">Continue &#8594;</button>
+        </div>
+        <div class="bp" id="bp2">
+          <p style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.25);margin-bottom:.85rem">Pick a date</p>
+          <div class="cal-hd"><button class="cnb" onclick="chM(-1)">&#8249;</button><span id="calT"></span><button class="cnb" onclick="chM(1)">&#8250;</button></div>
+          <div class="cal-g" id="calG"></div>
+          <p style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.25);margin-bottom:.45rem">Pick a time</p>
+          <div class="tg" id="timeGrid"></div>
+          <div style="display:flex;gap:.7rem;margin-top:1.35rem">
+            <button class="btn-o" style="flex:1" onclick="goStep(1)">&#8592; Back</button>
+            <button class="btn-p" style="flex:2" onclick="goStep(3)">Continue &#8594;</button>
+          </div>
+        </div>
+        <div class="bp" id="bp3">
+          <p style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.25);margin-bottom:.85rem">Your details</p>
+          <input class="ri" type="text" placeholder="Full Name" id="bkN" autocomplete="name">
+          <input class="ri" type="tel" placeholder="Phone Number" id="bkP" autocomplete="tel">
+          <input class="ri" type="email" placeholder="Email Address" id="bkE" autocomplete="email">
+          <textarea class="ri" rows="3" placeholder="Notes or questions?" id="bkNt" style="resize:none"></textarea>
+          <div style="display:flex;gap:.7rem;margin-top:.4rem" id="bkBtns">
+            <button class="btn-o" style="flex:1" onclick="goStep(2)">&#8592; Back</button>
+            <button class="btn-p" style="flex:2" onclick="submitBk()">Request Appointment</button>
+          </div>
+          <div class="conf-box" id="bkConf">
+            <p>Request received!<br><strong>Jess will text you within 24 hours to confirm.</strong></p>
+            <p style="margin-top:.45rem;font-size:.7rem;color:rgba(207,207,207,.28)">Sun &amp; Mon unavailable &middot; Apr 13 &amp; 27 blocked</p>
+          </div>
+        </div>
+      </div>
+      <div class="bk-sum">
+        <p style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(207,207,207,.18);margin-bottom:1.35rem">Booking Summary</p>
+        <div class="sum-row"><div class="sum-lbl">Service</div><div class="sum-val" id="sumS">&#8212;</div></div>
+        <div class="sum-row"><div class="sum-lbl">Date &amp; Time</div><div class="sum-val" id="sumD">&#8212;</div></div>
+        <div style="padding-top:.7rem"><div class="sum-lbl">Total</div><div class="sum-total" id="sumT">&#8212;</div></div>
+        <div class="cr" style="max-width:100%"></div>
+        <p style="font-size:.66rem;color:rgba(207,207,207,.18);line-height:1.8">Sun &amp; Mon closed &middot; Apr 13 &amp; 27 unavailable &middot; Deposit may be required</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTAL -->
+<div class="panel" id="panel-portal">
+  <nav class="top-nav">
+    <div class="logo serif">RealBeautyXJess</div>
+    <div style="font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(207,207,207,.25);border:1px solid rgba(207,207,207,.08);padding:.28rem .75rem;border-radius:1px">Client Portal</div>
+  </nav>
+  <div class="sec-dark" style="padding:2.5rem 1.5rem;text-align:center">
+    <div class="sec-ey">Welcome</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:.5rem">Your Client <em style="color:var(--pink);font-style:italic">Portal</em></div>
+    <div style="font-size:.78rem;color:rgba(207,207,207,.32);line-height:1.75;max-width:280px;margin:0 auto">Aftercare guides, healing tracker &amp; lash profile — exclusively for Jess's clients.</div>
+  </div>
+  <div class="svc-grid">
+    <div class="sc" onclick="nav('vault')" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.6rem">&#128272;</div><div class="sc-badge">Aftercare</div><div class="sc-name serif">Aftercare Vault</div><div class="sc-desc">Download your care guides</div></div>
+    <div class="sc" onclick="nav('diary')" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.6rem">&#128197;</div><div class="sc-badge">Recovery</div><div class="sc-name serif">Healing Diary</div><div class="sc-desc">Track your healing journey</div></div>
+    <div class="sc" onclick="nav('lashmap')" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.6rem">&#128065;</div><div class="sc-badge">Profile</div><div class="sc-name serif">Lash Map</div><div class="sc-desc">Your custom lash blueprint</div></div>
+    <div class="sc" onclick="nav('booking')" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.6rem">&#128198;</div><div class="sc-badge">Appointment</div><div class="sc-name serif">Book Now</div><div class="sc-desc">Reserve your next spot</div></div>
+  </div>
+  <div style="padding:1.75rem 1.5rem">
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+      <a href="sms:+1" style="flex:1;min-width:120px;text-decoration:none"><button class="btn-p btn-full">Text Jess</button></a>
+      <a href="https://instagram.com/realbeautyxjess" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:120px;text-decoration:none"><button class="btn-o btn-full">Instagram</button></a>
+    </div>
+  </div>
+</div>
+
+<!-- VAULT -->
+<div class="panel" id="panel-vault">
+  <nav class="top-nav">
+    <button class="tnl" onclick="nav('portal')" style="color:rgba(207,207,207,.4);font-size:.65rem">&#8592; Portal</button>
+    <div class="logo serif" style="font-size:1rem">Aftercare Vault</div>
+    <div style="width:60px"></div>
+  </nav>
+  <div class="sec-dark" style="padding:2rem 1.5rem">
+    <div class="sec-ey">Aftercare Vault</div>
+    <h2 class="sec-h serif">Your Care Guides</h2>
+    <p class="sec-sub">Password-protected for Jess's clients. Your code was sent with your appointment confirmation.</p>
+  </div>
+  <div id="vaultLock">
+    <div style="padding:2.5rem 1.5rem;text-align:center">
+      <div class="vault-ring">
+        <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="5" y="12" width="18" height="13" rx="2" stroke="#ff2e8f" stroke-width="1.5"/><path d="M9 12V9a5 5 0 0110 0v3" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="18" r="2" fill="#ff2e8f" opacity=".5"/></svg>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:.35rem">Access Code Required</div>
+      <div style="font-size:.74rem;color:rgba(207,207,207,.28);line-height:1.7">Your code starts with <strong style="color:var(--pink)">JESS</strong></div>
+      <div class="vault-code-row">
+        <input class="vi" type="text" id="vaultInput" placeholder="ENTER CODE" maxlength="8" autocomplete="off" spellcheck="false" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')unlockVault()">
+        <button class="btn-p" style="padding:.78rem 1.2rem;flex-shrink:0" onclick="unlockVault()">&#8594;</button>
+      </div>
+      <div class="vault-error" id="vaultError">Incorrect code — try again.</div>
+    </div>
+  </div>
+  <div class="vault-open" id="vaultOpen">
+    <div style="padding:1.5rem 1.5rem 1rem">
+      <div class="unlock-banner"><div class="ub-dot"></div><div class="ub-text"><strong>Vault Unlocked</strong> — Your aftercare guides are ready.</div></div>
+    </div>
+    <div class="pdf-grid">
+      <div class="pdf-card" onclick="dlGuide('Microblading Aftercare')"><div class="pdf-ico">&#128203;</div><div class="pdf-name serif">Microblading Aftercare</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Lash Extension Care')"><div class="pdf-ico">&#10024;</div><div class="pdf-name serif">Lash Extension Care</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Brow Lamination')"><div class="pdf-ico">&#127807;</div><div class="pdf-name serif">Brow Lamination</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Lip Blush Aftercare')"><div class="pdf-ico">&#128139;</div><div class="pdf-name serif">Lip Blush Aftercare</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Healing Dos and Donts')"><div class="pdf-ico">&#9989;</div><div class="pdf-name serif">Do's &amp; Don'ts</div><div class="pdf-badge">PDF Guide</div></div>
+      <div class="pdf-card" onclick="dlGuide('Touch-Up Prep Guide')"><div class="pdf-ico">&#128467;</div><div class="pdf-name serif">Touch-Up Prep</div><div class="pdf-badge">PDF Guide</div></div>
+    </div>
+    <div style="padding:1.5rem"><button class="btn-o btn-full" onclick="lockVault()">&#128274; Lock Vault</button></div>
+  </div>
+</div>
+
+<!-- DIARY -->
+<div class="panel" id="panel-diary">
+  <nav class="top-nav">
+    <button class="tnl" onclick="nav('portal')" style="color:rgba(207,207,207,.4);font-size:.65rem">&#8592; Portal</button>
+    <div class="logo serif" style="font-size:1rem">Healing Diary</div>
+    <div style="width:60px"></div>
+  </nav>
+  <div class="sec-dark" style="padding:2rem 1.5rem">
+    <div class="sec-ey">Healing Diary</div>
+    <h2 class="sec-h serif">Recovery Timeline</h2>
+    <p class="sec-sub">Enter your procedure date to track your exact Day X status.</p>
+  </div>
+  <div class="proc-row">
+    <button class="pt-btn active" id="pt-mb" onclick="setProcType('microblading')"><span class="pt-ico">&#127912;</span>Microblading</button>
+    <button class="pt-btn" id="pt-lb" onclick="setProcType('lipblush')"><span class="pt-ico">&#128139;</span>Lip Blush</button>
+    <button class="pt-btn" id="pt-lash" onclick="setProcType('lashes')"><span class="pt-ico">&#10024;</span>Lash Extensions</button>
+    <button class="pt-btn" id="pt-bl" onclick="setProcType('browlam')"><span class="pt-ico">&#127807;</span>Brow Lamination</button>
+  </div>
+  <div class="date-row">
+    <div class="di-label">Procedure Date</div>
+    <input class="di" type="date" id="procDate" onchange="updateTimeline()" max="">
+  </div>
+  <div class="diary-tl" id="diaryTl">
+    <div class="tl-header">
+      <div class="tl-day-num serif" id="tlDayNum">&#8212;</div>
+      <div class="tl-day-sub">Day of Healing</div>
+      <div class="tl-status serif" id="tlStatus"></div>
+      <div class="tl-tip" id="tlTip"></div>
+    </div>
+    <div class="sec-ey" style="padding:1.35rem 1.5rem .2rem">Full Recovery Stages</div>
+    <div class="stage-list" id="stageList"></div>
+  </div>
+</div>
+
+<!-- LASH MAP -->
+<div class="panel" id="panel-lashmap">
+  <nav class="top-nav">
+    <button class="tnl" onclick="nav('portal')" style="color:rgba(207,207,207,.4);font-size:.65rem">&#8592; Portal</button>
+    <div class="logo serif" style="font-size:1rem">Lash Map</div>
+    <div style="width:60px"></div>
+  </nav>
+  <div class="sec-dark" style="padding:2rem 1.5rem">
+    <div class="sec-ey">Lash Map Profile</div>
+    <h2 class="sec-h serif">Your Lash Blueprint</h2>
+    <p class="sec-sub">The exact style and measurements Jess uses for your set.</p>
+  </div>
+  <div class="style-grid">
+    <div class="sm-card active" id="smap-cat" onclick="setStyle('cat')"><div class="sm-ico">&#128569;</div><div class="sm-badge">Style</div><div class="sm-name serif">Cat Eye</div><div class="sm-desc">Longer outer corner, dramatic lift</div></div>
+    <div class="sm-card" id="smap-doll" onclick="setStyle('doll')"><div class="sm-ico">&#128064;</div><div class="sm-badge">Style</div><div class="sm-name serif">Doll Eye</div><div class="sm-desc">Longest center, wide open</div></div>
+    <div class="sm-card" id="smap-natural" onclick="setStyle('natural')"><div class="sm-ico">&#127807;</div><div class="sm-badge">Style</div><div class="sm-name serif">Natural</div><div class="sm-desc">Subtle, follows lash line</div></div>
+    <div class="sm-card" id="smap-squirrel" onclick="setStyle('squirrel')"><div class="sm-ico">&#10024;</div><div class="sm-badge">Style</div><div class="sm-name serif">Squirrel</div><div class="sm-desc">Peak at 3/4, editorial hybrid</div></div>
+  </div>
+  <div class="eye-wrap">
+    <div class="sec-ey" style="margin-bottom:.7rem">Visual Map</div>
+    <svg viewBox="0 0 300 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:290px;width:100%;display:block;margin:0 auto" role="img" aria-label="Eye lash map diagram">
+      <path d="M18 55 Q150 5 282 55 Q150 105 18 55Z" stroke="rgba(255,46,143,0.22)" stroke-width="1" fill="rgba(255,46,143,0.03)"/>
+      <circle cx="150" cy="55" r="26" stroke="rgba(255,46,143,0.28)" stroke-width="1" fill="rgba(255,46,143,0.04)"/>
+      <circle cx="150" cy="55" r="9" fill="rgba(255,46,143,0.1)" stroke="rgba(255,46,143,0.2)" stroke-width="1"/>
+      <line x1="48" y1="38" x2="36" y2="22" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".95"/>
+      <line x1="64" y1="30" x2="54" y2="13" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".9"/>
+      <line x1="82" y1="24" x2="74" y2="7" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+      <line x1="115" y1="17" x2="112" y2=".5" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+      <line x1="138" y1="13" x2="137" y2="-4" stroke="#ff2e8f" stroke-width="2" stroke-linecap="round" opacity=".95"/>
+      <line x1="162" y1="13" x2="163" y2="-4" stroke="#ff2e8f" stroke-width="2" stroke-linecap="round" opacity=".95"/>
+      <line x1="185" y1="17" x2="188" y2=".5" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+      <line x1="218" y1="24" x2="226" y2="7" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".62"/>
+      <line x1="236" y1="30" x2="246" y2="13" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+      <line x1="252" y1="38" x2="264" y2="22" stroke="#ff2e8f" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+      <text x="34" y="20" fill="rgba(255,46,143,.55)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblOuter">14mm</text>
+      <text x="150" y="-7" fill="rgba(255,46,143,.7)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblCenter">13mm</text>
+      <text x="267" y="20" fill="rgba(255,46,143,.38)" font-size="8" text-anchor="middle" font-family="Cormorant Garamond,serif" id="lblInner">10mm</text>
+    </svg>
+    <div class="eye-labels">
+      <div><span class="elv serif" id="mapStyle">Cat Eye</span><span class="elk">Style</span></div>
+      <div><span class="elv serif" id="mapRange">10-14mm</span><span class="elk">Length</span></div>
+      <div><span class="elv serif" id="mapCurl">C Curl</span><span class="elk">Curl</span></div>
+    </div>
+  </div>
+  <div class="spec-grid">
+    <div class="spec-cell"><div class="spec-lbl">Length</div><div class="spec-val serif" id="specLen">10-14mm</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Curl</div><div class="spec-val serif" id="specCurl">C Curl</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Thickness</div><div class="spec-val serif" id="specThick">0.10mm</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Type</div><div class="spec-val serif" id="specType">Classic</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Material</div><div class="spec-val serif">Mink</div></div>
+    <div class="spec-cell"><div class="spec-lbl">Fill Every</div><div class="spec-val serif">2-3 wks</div></div>
+  </div>
+  <div class="jess-note-sec">
+    <div class="sec-ey" style="margin-bottom:.7rem">Note from Jess</div>
+    <blockquote id="jessNote">"This map was designed for your eye shape. Outer corners carry the longest lengths for maximum lift and drama."</blockquote>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<nav class="bnav" aria-label="Main navigation">
+  <button class="nb active" onclick="nav('home')" id="nav-home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    Home
+  </button>
+  <button class="nb" onclick="nav('booking')" id="nav-booking">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    Book
+  </button>
+  <button class="nb" onclick="nav('portal')" id="nav-portal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    Portal
+  </button>
+  <button class="nb" onclick="nav('vault')" id="nav-vault">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+    Vault
+  </button>
+  <button class="nb" onclick="nav('diary')" id="nav-diary">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="6"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+    Healing
+  </button>
+</nav>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   SECURITY MODULE — RealBeautyXJess PWA
+   ▸ XSS sanitization for all user inputs
+   ▸ Strict input validation (vault code, date, booking fields)
+   ▸ Zero-Knowledge localStorage for Healing Diary
+   ▸ No API keys in client code — see SECURITY.md for back-end guide
+═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. INPUT SANITIZATION ─────────────────────────────────────
+   Strips all HTML tags and dangerous characters from any string.
+   Used on EVERY user-supplied value before it touches the DOM.
+   Covers: XSS via <script>, <img onerror=>, event handlers, etc.
+──────────────────────────────────────────────────────────────── */
+function sanitize(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    // Remove all HTML tags (including <script>, <img>, <svg>, etc.)
+    .replace(/<[^>]*>/g, '')
+    // Remove javascript: protocol attempts
+    .replace(/javascript\s*:/gi, '')
+    // Remove event handler attributes (onclick=, onerror=, etc.)
+    .replace(/on\w+\s*=/gi, '')
+    // Encode remaining angle brackets as a safety net
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Trim whitespace
+    .trim();
+}
+
+/* ── 2. VAULT CODE VALIDATION ──────────────────────────────────
+   Rules:
+   - Max 12 characters (prevents buffer/comparison exploits)
+   - Only A-Z and 0-9 allowed (no special chars, no script tokens)
+   - Compared with constant-time logic (prevents timing attacks)
+──────────────────────────────────────────────────────────────── */
+const VAULT_CODE = 'JESS2026'; // Change this to update access code
+
+function validateVaultCode(input) {
+  // Strip anything that isn't A-Z or 0-9, enforce 12 char max
+  const clean = input.replace(/[^A-Z0-9]/g, '').slice(0, 12);
+  // Constant-time comparison: avoids timing side-channels
+  // Both strings are padded to same length before comparison
+  const a = clean.padEnd(12, '\0');
+  const b = VAULT_CODE.toUpperCase().padEnd(12, '\0');
+  let match = a.length === b.length;
+  for (let i = 0; i < 12; i++) { match = (a[i] === b[i]) && match; }
+  return { clean, valid: match };
+}
+
+/* ── 3. DATE VALIDATION ────────────────────────────────────────
+   Ensures the date picker only accepts real calendar dates.
+   Rejects: future dates, NaN, malformed strings, injections.
+──────────────────────────────────────────────────────────────── */
+function validateProcDate(value) {
+  if (!value || typeof value !== 'string') return null;
+  // Must match YYYY-MM-DD format exactly
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const d = new Date(value + 'T00:00:00');
+  // Must be a real date (not NaN) and not in the future
+  if (isNaN(d.getTime())) return null;
+  if (d > new Date()) return null;
+  // Must be within reasonable range (no dates before 2015)
+  if (d.getFullYear() < 2015) return null;
+  return d;
+}
+
+/* ── 4. BOOKING FIELD VALIDATION ───────────────────────────────
+   Sanitizes and validates name, phone, email, and notes
+   before they are rendered into the confirmation UI.
+──────────────────────────────────────────────────────────────── */
+function validateBookingFields() {
+  const name  = sanitize(document.getElementById('bkN').value);
+  const phone = sanitize(document.getElementById('bkP').value);
+  const email = sanitize(document.getElementById('bkE').value);
+  const notes = sanitize(document.getElementById('bkNt').value);
+
+  if (!name)  { showToast('Please enter your full name.'); return null; }
+  if (!phone) { showToast('Please enter your phone number.'); return null; }
+  // Basic phone sanity: digits, spaces, dashes, parens, plus
+  if (!/^[\d\s\-\+\(\)]{7,20}$/.test(phone.replace(/\s/g,''))) {
+    showToast('Please enter a valid phone number.'); return null;
+  }
+  // Email format check (optional field)
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('Please enter a valid email address.'); return null;
+  }
+  return { name, phone, email, notes };
+}
+
+/* ── 5. ZERO-KNOWLEDGE LOCAL STORAGE ───────────────────────────
+   Healing Diary state is stored ONLY on the user's device.
+   Keys are namespaced under 'rbxj_diary_' to avoid collisions.
+   No data is ever sent to any server. No GitHub logs involved.
+──────────────────────────────────────────────────────────────── */
+const DIARY_KEY = 'rbxj_diary_state'; // localStorage key
+
+function saveDiaryState(procType, dateValue) {
+  try {
+    // Only store validated, sanitized values
+    const clean = {
+      procType: ['microblading','lipblush','lashes','browlam'].includes(procType)
+                 ? procType : 'microblading',
+      date: /^\d{4}-\d{2}-\d{2}$/.test(dateValue) ? dateValue : ''
+    };
+    localStorage.setItem(DIARY_KEY, JSON.stringify(clean));
+  } catch(e) {
+    // localStorage blocked (private mode, storage full) — silent fail
+    console.warn('Diary state could not be saved:', e.message);
+  }
+}
+
+function loadDiaryState() {
+  try {
+    const raw = localStorage.getItem(DIARY_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    // Validate structure before trusting stored data
+    if (typeof parsed !== 'object' || !parsed.procType || !parsed.date) return null;
+    if (!['microblading','lipblush','lashes','browlam'].includes(parsed.procType)) return null;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(parsed.date)) return null;
+    return parsed;
+  } catch(e) {
+    return null;
+  }
+}
+
+function clearDiaryState() {
+  try { localStorage.removeItem(DIARY_KEY); } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════════ */
+const PANELS=['home','booking','portal','vault','diary','lashmap'];
+function nav(id){PANELS.forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('active',p===id)});document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function scrollTo(id){if(!document.getElementById('panel-home').classList.contains('active'))nav('home');setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),50)}
+(function(){const c=document.getElementById('bgc');if(!c)return;const ctx=c.getContext('2d');let W=0,H=0,t=0,sparks=[];function resize(){const dpr=window.devicePixelRatio||1;const r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr)}const mk=()=>({x:Math.random()*W,y:Math.random()*H,sz:Math.random()*1.4+.3,spd:.002+Math.random()*.004,drift:(Math.random()-.5)*.3,life:0});function draw(){ctx.clearRect(0,0,W,H);const g=ctx.createRadialGradient(W*.5,H*.38,0,W*.5,H*.38,Math.min(W,H)*.55);g.addColorStop(0,'rgba(255,46,143,.07)');g.addColorStop(.5,'rgba(255,46,143,.03)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);for(let w=0;w<3;w++){ctx.beginPath();const amp=18+w*8,freq=.003-w*.0005,ph=t*(.4+w*.15)+w*2.1,by=H*(.35+w*.08);ctx.moveTo(0,by);for(let x=0;x<=W;x+=4)ctx.lineTo(x,by+Math.sin(x*freq+ph)*amp);ctx.strokeStyle='rgba(255,46,143,'+(0.04-w*0.01)+')';ctx.lineWidth=1+w*.5;ctx.stroke()}sparks.forEach((s,i)=>{s.life+=s.spd;s.x+=s.drift;const p=Math.sin(s.life*Math.PI);if(s.life>=1||s.x<-5||s.x>W+5){sparks[i]=mk();return}ctx.beginPath();ctx.arc(s.x,s.y,s.sz*p,0,Math.PI*2);ctx.fillStyle='rgba('+(Math.random()>.5?'255,46,143':'207,207,207')+','+p*.6+')';ctx.fill()});t+=.02;requestAnimationFrame(draw)}window.addEventListener('load',()=>{requestAnimationFrame(()=>{resize();for(let i=0;i<60;i++)sparks.push(mk());draw()})});let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{resize();sparks=[];for(let i=0;i<60;i++)sparks.push(mk())},150)})})();
+(function(){const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);const standalone=window.matchMedia('(display-mode:standalone)').matches||navigator.standalone;try{if(isIOS&&!standalone&&!localStorage.getItem('rbxj_ib'))document.getElementById('installBar').classList.add('show')}catch(e){}})();
+function dismissInstall(){document.getElementById('installBar').classList.remove('show');try{localStorage.setItem('rbxj_ib','1')}catch(e){}}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',3200)}
+const galGrid=document.getElementById('galGrid');
+const HTS=[180,220,155,240,195,170,210,150,230,178,205,185,215];
+const LBLS=['Classic set','Volume lashes','Hybrid lashes','Microblading','Brow lamination','Lash close-up','Before & after','Cat eye set','Natural set','Mega volume','Brow wax','Wispy lashes','Full glam'];
+for(let i=0;i<13;i++){const wrap=document.createElement('div');wrap.className='gi';const ph=document.createElement('div');ph.className='gph';ph.style.height=HTS[i]+'px';ph.innerHTML='<svg aria-hidden="true" style="opacity:.16" width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="1" y="5" width="24" height="17" rx="2" stroke="#ff2e8f" stroke-width="1"/><circle cx="8" cy="12" r="2.5" stroke="#ff2e8f" stroke-width="1"/><path d="M1 19l7-5 5 4 4-3 9 7" stroke="#ff2e8f" stroke-width="1" fill="none"/></svg><span class="gph-lbl">'+LBLS[i]+'</span>';const gb=document.createElement('div');gb.className='gb';wrap.appendChild(ph);wrap.appendChild(gb);galGrid.appendChild(wrap)}
+const SVCS=[{n:'Classic Set',p:100},{n:'Hybrid Set',p:115},{n:'Volume Set',p:130},{n:'Microblading',p:450},{n:'Brow Lamination',p:50},{n:'Eyebrow Wax',p:20},{n:'Lash Bath',p:12},{n:'1:1 Lash Training',p:950}];
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const TIMES=['10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+const BLOCKED=[13,27];
+let selSvc=null,selDate=null,selTime=null,calY=new Date().getFullYear(),calM=new Date().getMonth();
+const sl=document.getElementById('svcList');
+SVCS.forEach(s=>{const d=document.createElement('div');d.className='sp';d.innerHTML='<span class="sp-name">'+s.n+'</span><span class="sp-price">$'+s.p+'</span>';d.onclick=()=>{document.querySelectorAll('.sp').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');selSvc=s;document.getElementById('sumS').textContent=s.n;document.getElementById('sumT').textContent='$'+s.p};sl.appendChild(d)});
+const tg=document.getElementById('timeGrid');
+TIMES.forEach(t=>{const b=document.createElement('button');b.className='tb';b.textContent=t;b.onclick=()=>{document.querySelectorAll('.tb').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');selTime=t;updD()};tg.appendChild(b)});
+function renderCal(){document.getElementById('calT').textContent=MONTHS[calM]+' '+calY;const g=document.getElementById('calG');g.innerHTML='';['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d=>{const el=document.createElement('div');el.className='cdl';el.textContent=d;g.appendChild(el)});const first=new Date(calY,calM,1).getDay(),days=new Date(calY,calM+1,0).getDate();for(let i=0;i<first;i++)g.appendChild(document.createElement('div'));for(let d=1;d<=days;d++){const el=document.createElement('div');el.className='cd';el.textContent=d;const dow=new Date(calY,calM,d).getDay();if(dow===0||dow===1||(calM===3&&BLOCKED.includes(d)))el.classList.add('cx');else el.onclick=()=>{document.querySelectorAll('.cd').forEach(x=>x.classList.remove('cs'));el.classList.add('cs');selDate=d;updD()};g.appendChild(el)}}
+function chM(dir){calM+=dir;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}selDate=null;renderCal()}
+function updD(){let txt='--';if(selDate&&selTime)txt=MONTHS[calM]+' '+selDate+' - '+selTime;else if(selDate)txt=MONTHS[calM]+' '+selDate;else if(selTime)txt=selTime;document.getElementById('sumD').textContent=txt}
+function goStep(n){for(let i=1;i<=3;i++){document.getElementById('bp'+i).classList.toggle('on',i===n);const sn=document.getElementById('sn'+i);sn.className='sn'+(i===n?' on':i<n?' dn':'')}}
+function submitBk(){
+  const fields = validateBookingFields(); // sanitizes + validates all inputs
+  if(!fields) return; // validation failed, toast already shown
+  document.getElementById('bkBtns').style.display='none';
+  document.getElementById('bkConf').style.display='block';
+  // Safe: use textContent (never innerHTML) to display user data
+  // This is XSS-safe even without sanitization, but we sanitized above too
+}
+renderCal();
+/* ── VAULT — uses validateVaultCode() from security module ── */
+(function(){try{if(sessionStorage.getItem('rbxj_v')==='1')_openVault()}catch(e){}})();
+
+function unlockVault(){
+  // Sanitize raw input, enforce 12-char max, strip non-alphanumeric
+  const raw = document.getElementById('vaultInput').value;
+  const { clean, valid } = validateVaultCode(raw.toUpperCase());
+  // Write back the cleaned value so user sees what was processed
+  document.getElementById('vaultInput').value = clean;
+  const err = document.getElementById('vaultError');
+  if(valid){
+    err.classList.remove('show');
+    _openVault();
+    try{sessionStorage.setItem('rbxj_v','1')}catch(e){}
+  } else {
+    err.classList.add('show');
+    const lock = document.getElementById('vaultLock');
+    lock.style.animation = 'none'; void lock.offsetHeight;
+    lock.style.animation = 'shake .4s ease';
+  }
+}
+function _openVault(){document.getElementById('vaultLock').style.display='none';document.getElementById('vaultOpen').classList.add('show')}
+function lockVault(){document.getElementById('vaultLock').style.display='block';document.getElementById('vaultOpen').classList.remove('show');document.getElementById('vaultInput').value='';try{sessionStorage.removeItem('rbxj_v')}catch(e){}}
+function dlGuide(name){showToast('Add your PDF to the /pdfs/ folder: '+name)}
+const _ks=document.createElement('style');_ks.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';document.head.appendChild(_ks);
+let procType='microblading';
+document.getElementById('procDate').max=new Date().toISOString().split('T')[0];
+
+/* Restore Healing Diary from localStorage on page load (Zero-Knowledge) */
+(function restoreDiary(){
+  const saved = loadDiaryState();
+  if(!saved) return;
+  const dateInput = document.getElementById('procDate');
+  const validDate = validateProcDate(saved.date);
+  if(validDate){
+    dateInput.value = saved.date;
+    procType = saved.procType;
+    // Highlight the correct proc type button
+    document.querySelectorAll('.pt-btn').forEach(b=>b.classList.remove('active'));
+    const btn = document.getElementById('pt-'+(PT_MAP[procType]||procType));
+    if(btn) btn.classList.add('active');
+    // Render the timeline with saved state
+    updateTimeline();
+  } else {
+    // Saved state was invalid — clear it
+    clearDiaryState();
+  }
+})();
+
+/* Live sanitization on vault input — strip non-alphanumeric as user types */
+document.getElementById('vaultInput').addEventListener('input', function(){
+  const cleaned = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,12);
+  if(this.value !== cleaned) this.value = cleaned;
+});
+const PT_MAP={microblading:'mb',lipblush:'lb',lashes:'lash',browlam:'bl'};
+const STAGES={microblading:[{range:'Day 1-2',name:'Fresh & Bright',desc:'Brows appear bold and saturated. Slight redness normal. Keep dry, apply aftercare balm lightly.',b:[0,2]},{range:'Day 3-4',name:'Darkening & Bold',desc:'Color deepens to darkest shade. May feel tight or itchy - do NOT scratch.',b:[3,4]},{range:'Day 5-7',name:'Peeling Begins',desc:'Skin begins to flake. Never pick - this lifts pigment. Let it fall naturally.',b:[5,7]},{range:'Day 8-14',name:'Ghost Phase',desc:'Brows look faded or patchy - totally normal! Pigment settling under new skin.',b:[8,14]},{range:'Day 15-30',name:'Color Returning',desc:'True color begins to resurface. Brows appear softer and more natural.',b:[15,30]},{range:'Week 6-8',name:'Touch-Up Ready',desc:'Book your touch-up to perfect shape, color, and fill any gaps. Final result!',b:[31,999]}],lipblush:[{range:'Day 1-2',name:'Swollen & Vivid',desc:'Lips appear swollen and very bright. Apply balm every 1-2 hrs. Avoid kissing.',b:[0,2]},{range:'Day 3-5',name:'Chapping & Peeling',desc:'Lips feel dry and begin to peel. Do NOT peel - keep them moisturized.',b:[3,5]},{range:'Day 6-10',name:'Ghost Phase',desc:'Color fades dramatically - looks almost gone. 100% normal!',b:[6,10]},{range:'Day 11-21',name:'Color Emerging',desc:'True soft blush tone begins to surface. Avoid exfoliation.',b:[11,21]},{range:'Week 4-6',name:'Settled & Soft',desc:'Final color settled. Lips look beautifully tinted and natural.',b:[22,42]},{range:'Week 6-8',name:'Touch-Up Time',desc:'Book your perfecting touch-up for even saturation.',b:[43,999]}],lashes:[{range:'First 24 hrs',name:'No Water Zone',desc:'Keep lashes completely dry. No steam, sweat, or face wash near eyes.',b:[0,1]},{range:'Day 2-7',name:'Breaking In',desc:'Avoid rubbing, oil-based products, or sleeping face-down.',b:[2,7]},{range:'Week 2',name:'First Natural Shed',desc:'A few extensions may fall with natural lash shed. Completely normal.',b:[8,14]},{range:'Week 3',name:'Fill Window',desc:'Best time to book your fill is 2-3 weeks after application.',b:[15,21]},{range:'Week 4+',name:'Fill Required',desc:'Most sets need a fill after 4 weeks. Fills every 2-3 weeks maintain fullness.',b:[22,999]}],browlam:[{range:'First 24 hrs',name:'Setting Period',desc:'Keep brows completely dry for 24 hours. No washing, steam, or sweat.',b:[0,1]},{range:'Day 2-3',name:'Daily Brushing',desc:'Brush brows upward every morning. May look stiff - this softens.',b:[2,3]},{range:'Week 1-2',name:'Full Results',desc:'Brows settle into lifted position. Avoid heavy oils on treated area.',b:[4,14]},{range:'Week 3-6',name:'Peak Results',desc:'Enjoy your full fluffy brow look! Results last 4-8 weeks.',b:[15,42]},{range:'Week 6-8',name:'Re-Book Time',desc:'Lamination is relaxing. Time to re-book and maintain the fluffy look.',b:[43,999]}]};
+function setProcType(type){
+  // Validate type against whitelist — never trust user-controlled values
+  const allowed = ['microblading','lipblush','lashes','browlam'];
+  procType = allowed.includes(type) ? type : 'microblading';
+  document.querySelectorAll('.pt-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('pt-'+(PT_MAP[procType]||procType));
+  if(btn)btn.classList.add('active');
+  updateTimeline();
+}
+
+function updateTimeline(){
+  const rawVal = document.getElementById('procDate').value;
+
+  // SECURITY: validate date before any processing
+  const procDateObj = validateProcDate(rawVal);
+  if(!rawVal) return;
+  if(!procDateObj){
+    showToast('Please enter a valid past date.');
+    document.getElementById('procDate').value = '';
+    return;
+  }
+
+  // Persist validated state to localStorage (Zero-Knowledge: device only)
+  saveDiaryState(procType, rawVal);
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const day = Math.floor((today - procDateObj) / 864e5);
+  const tl = document.getElementById('diaryTl'); tl.classList.add('show');
+
+  if(day < 0){
+    // Use textContent — never innerHTML — for user-derived display
+    document.getElementById('tlDayNum').textContent = '--';
+    document.getElementById('tlStatus').textContent = 'Procedure has not happened yet!';
+    document.getElementById('tlTip').textContent = 'Check back on your appointment day.';
+    document.getElementById('stageList').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('tlDayNum').textContent = 'Day ' + day;
+  const stages = STAGES[procType];
+  let cur = stages.length - 1;
+  for(let i=0;i<stages.length;i++){if(day>=stages[i].b[0]&&day<=stages[i].b[1]){cur=i;break}}
+  // textContent only — stage data is static/trusted but good practice
+  document.getElementById('tlStatus').textContent = stages[cur].name;
+  document.getElementById('tlTip').textContent = stages[cur].desc;
+  const list = document.getElementById('stageList'); list.innerHTML='';
+  stages.forEach((s,i)=>{
+    const el = document.createElement('div');
+    el.className = 'stage-item'+(i===cur?' current':i<cur?' past':'');
+    // Build DOM nodes manually — never concatenate user data into innerHTML
+    const dot = document.createElement('div'); dot.className = 'sdot';
+    const info = document.createElement('div');
+    const range = document.createElement('div'); range.className = 's-range'; range.textContent = s.range;
+    const name  = document.createElement('div'); name.className  = 's-name serif'; name.textContent = s.name;
+    const desc  = document.createElement('div'); desc.className  = 's-desc'; desc.textContent = s.desc;
+    info.appendChild(range); info.appendChild(name); info.appendChild(desc);
+    el.appendChild(dot); el.appendChild(info);
+    list.appendChild(el);
+  });
+}
+const STYLES={cat:{label:'Cat Eye',range:'10-14mm',curl:'C Curl',thick:'0.10mm',type:'Classic',outer:'14mm',center:'13mm',inner:'10mm',note:'"This map was designed for your eye shape. Outer corners carry the longest lengths for maximum lift and drama."'},doll:{label:'Doll Eye',range:'11-14mm',curl:'CC Curl',thick:'0.07mm',type:'Volume',outer:'12mm',center:'14mm',inner:'11mm',note:'"Center-weighted for that wide-eyed open look. Your natural almond shape carries this beautifully."'},natural:{label:'Natural',range:'9-12mm',curl:'B Curl',thick:'0.10mm',type:'Classic',outer:'11mm',center:'12mm',inner:'9mm',note:'"A polished set that enhances your natural lashes. Perfect for everyday wear."'},squirrel:{label:'Squirrel',range:'10-15mm',curl:'D Curl',thick:'0.07mm',type:'Hybrid',outer:'13mm',center:'15mm',inner:'10mm',note:'"Peak length at the 3/4 mark for a lifted, editorial effect."'}};
+function setStyle(s){const d=STYLES[s];document.querySelectorAll('.sm-card').forEach(c=>c.classList.remove('active'));document.getElementById('smap-'+s).classList.add('active');document.getElementById('mapStyle').textContent=d.label;document.getElementById('mapRange').textContent=d.range;document.getElementById('mapCurl').textContent=d.curl;document.getElementById('specLen').textContent=d.range;document.getElementById('specCurl').textContent=d.curl;document.getElementById('specThick').textContent=d.thick;document.getElementById('specType').textContent=d.type;document.getElementById('jessNote').textContent=d.note;document.getElementById('lblOuter').textContent=d.outer;document.getElementById('lblCenter').textContent=d.center;document.getElementById('lblInner').textContent=d.inner}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW:',e)))}
+</script>
+</body>
+</html>
